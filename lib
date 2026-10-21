@@ -1,36 +1,36 @@
 -- UILib | simple client UI library | UILib.new{...} -> Window
 
 local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
 local UILib = {}
 UILib.__index = UILib
 
-local function create(className, properties, children)
+local function create(className, properties)
 	local instance = Instance.new(className)
 	if properties then
-		for key, value in properties do
+		for key, value in pairs(properties) do
 			instance[key] = value
 		end
-	end
-	for _, child in children do
-		child.Parent = instance
 	end
 	return instance
 end
 
 local function round(object, radius, clip)
 	object.ClipsDescendants = clip ~= false
-	create("UICorner", { CornerRadius = UDim.new(0, radius) }, { object })
+	local corner = create("UICorner", { CornerRadius = UDim.new(0, radius) })
+	corner.Parent = object
 end
 
 local function outline(object, color, thickness)
-	create("UIStroke", {
+	local stroke = create("UIStroke", {
 		Color = color,
 		Thickness = thickness,
 		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-	}, { object })
+	})
+	stroke.Parent = object
 end
 
 local function tween(object, properties, duration)
@@ -59,11 +59,11 @@ local Theme = {
 
 local function mergeTheme(overrides)
 	local merged = {}
-	for key, value in Theme do
+	for key, value in pairs(Theme) do
 		merged[key] = value
 	end
 	if overrides then
-		for key, value in overrides do
+		for key, value in pairs(overrides) do
 			merged[key] = value
 		end
 	end
@@ -290,7 +290,7 @@ function UILib:Restore()
 	layoutMinimizedButtons()
 end
 
-function UILib:Toggle()
+function UILib:ToggleMinimized()
 	if self.Minimized then
 		self:Restore()
 	else
@@ -342,13 +342,15 @@ function UILib:Destroy()
 	self.Gui:Destroy()
 end
 
+local TabMethods = {}
+
 local function makeTab(window, name)
 	local tab = setmetatable({
 		Window = window,
 		Name = name,
 		Elements = {},
 		Height = 0,
-	}, { __index = UILib })
+	}, { __index = TabMethods })
 
 	local frame = create("Frame", {
 		Name = name,
@@ -373,11 +375,11 @@ local function makeTab(window, name)
 		AutoButtonColor = false,
 	})
 	button.Parent = window.TabBar
-	tab.Button = button
+	tab.TabButton = button
 
 	local offset = 0
 	for _, existing in ipairs(window.Tabs) do
-		offset = offset + existing.Button.Size.X.Offset
+		offset = offset + existing.TabButton.Size.X.Offset
 	end
 	button.Position = UDim2.fromOffset(offset + 6, 0)
 	button.MouseButton1Click:Connect(function()
@@ -385,9 +387,7 @@ local function makeTab(window, name)
 	end)
 
 	table.insert(window.Tabs, tab)
-	if not window.ActiveTab then
-		window:SelectTab(tab)
-	end
+	window:SelectTab(tab)
 
 	local function refresh()
 		local y = 0
@@ -423,7 +423,7 @@ function UILib:SelectTab(tab)
 	for _, existing in ipairs(self.Tabs) do
 		local active = existing == tab
 		existing.Frame.Visible = active
-		existing.Button.TextColor3 = active and self.Theme.Accent or self.Theme.SubText
+		existing.TabButton.TextColor3 = active and self.Theme.Accent or self.Theme.SubText
 	end
 	self.Content.CanvasSize = UDim2.new(1, 0, 0, math.max(tab.Height, 0))
 end
@@ -436,7 +436,7 @@ local function elementBase(tab, height)
 	}
 end
 
-function UILib:Label(text)
+function TabMethods:Label(text)
 	local tab = self
 	local theme = tab.Window.Theme
 	local element = elementBase(tab, 20)
@@ -455,7 +455,7 @@ function UILib:Label(text)
 	return tab.Add(element)
 end
 
-function UILib:Button(text, callback)
+function TabMethods:Button(text, callback)
 	local tab = self
 	local theme = tab.Window.Theme
 	local element = elementBase(tab, 34)
@@ -490,7 +490,7 @@ function UILib:Button(text, callback)
 	return tab.Add(element)
 end
 
-function UILib:Toggle(text, default)
+function TabMethods:Toggle(text, default)
 	local tab = self
 	local theme = tab.Window.Theme
 	local element = elementBase(tab, 26)
@@ -537,6 +537,7 @@ function UILib:Toggle(text, default)
 
 	local function apply(animate)
 		local target = value and UDim.new(0, 23) or UDim.new(0, 3)
+		element.Value = value
 		if animate then
 			tween(knob, { Position = UDim2.new(target.X, 0, 0.5, 0) }, 0.15)
 			tween(track, { BackgroundColor3 = value and theme.Accent or theme.Element }, 0.15)
@@ -560,17 +561,12 @@ function UILib:Toggle(text, default)
 		element.Value = value
 		apply(false)
 	end
-	element.Changed = function(_, newValue)
-		value = newValue == true
-		element.Value = value
-		apply(false)
-	end
 
 	apply(false)
 	return tab.Add(element)
 end
 
-function UILib:Slider(text, minimum, maximum, default, callback)
+function TabMethods:Slider(text, minimum, maximum, default, callback)
 	local tab = self
 	local theme = tab.Window.Theme
 	local element = elementBase(tab, 44)
@@ -703,7 +699,7 @@ function UILib:Slider(text, minimum, maximum, default, callback)
 	return tab.Add(element)
 end
 
-function UILib:Textbox(text, placeholder, default)
+function TabMethods:Textbox(text, placeholder, default)
 	local tab = self
 	local theme = tab.Window.Theme
 	local element = elementBase(tab, 34)
@@ -755,7 +751,7 @@ function UILib:Textbox(text, placeholder, default)
 	return tab.Add(element)
 end
 
-function UILib:Dropdown(text, options, default)
+function TabMethods:Dropdown(text, options, default)
 	local tab = self
 	local theme = tab.Window.Theme
 	local element = elementBase(tab, 34)
