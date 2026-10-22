@@ -1,1 +1,3192 @@
+-- ts file was generated at discord.gg/25ms
 
+MoonSec_StringsHiddenAttr = true
+
+if _ufLpQBksSMvM == 'Script made by Punchy39 (punchingfella on Discord .gg/j4PgkQ72wp)' then
+    -- Set to true to suppress Punchy's side notifications and the Alt Control overlay text.
+    local SILENCE_NOTIFICATIONS = true
+
+    if not AltControlLoaded then
+        getgenv().AltControlLoaded = true
+
+        local u1 = {
+            bangAnim = nil,
+            bang = nil,
+            bangDied = nil,
+            bangLoop = nil,
+            orbitRadius = 10,
+            orbitSpeed = 0.5,
+            orbit2Radius = 10,
+            orbit2Speed = 0.5,
+            indexcircle = 0,
+            jerking = nil,
+            jerkLoop = nil,
+        }
+
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua'))()
+
+        local u2 = loadstring(game:HttpGet('https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua'))()
+
+        game:GetService('TextChatService')
+        game:GetService('TextChatService')
+        game:GetService('TextChatService')
+
+        local _TextChatService = game:GetService('TextChatService')
+        local _RunService = game:GetService('RunService')
+
+        game:GetService('RunService')
+
+        local _RunService2 = game:GetService('RunService')
+        local _Players = game:GetService('Players')
+
+        game:GetService('Players')
+
+        local _Players2 = game:GetService('Players')
+
+        game:GetService('Players')
+        game:GetService('ReplicatedStorage')
+
+        local _ReplicatedStorage = game:GetService('ReplicatedStorage')
+
+        game:GetService('ReplicatedStorage')
+        game:GetService('ReplicatedStorage')
+
+        local _VirtualUser = game:GetService('VirtualUser')
+
+        game:GetService('VirtualUser')
+        game:GetService('VirtualUser')
+        game:GetService('VirtualUser')
+
+        local _ = _Players.LocalPlayer
+        local _LocalPlayer = _Players.LocalPlayer
+        local _LocalPlayer2 = _Players.LocalPlayer
+        local _ = _Players.LocalPlayer
+        local _ = _Players.LocalPlayer
+        local _ = _Players.LocalPlayer
+
+        game:GetService('UserInputService')
+        game:GetService('UserInputService')
+
+        local _UserInputService = game:GetService('UserInputService')
+
+        game:GetService('UserInputService')
+
+        local _TweenService = game:GetService('TweenService')
+
+        game:GetService('TweenService')
+        game:GetService('TweenService')
+        game:GetService('TweenService')
+        game:GetService('ContentProvider')
+        game:GetService('ContentProvider')
+        game:GetService('ContentProvider')
+        game:GetService('ContentProvider')
+        game:GetService('Workspace')
+        game:GetService('Workspace')
+
+        local _Workspace = game:GetService('Workspace')
+        local _Workspace2 = game:GetService('Workspace')
+
+        game:GetService('Workspace')
+        game:GetService('Workspace')
+
+        local _PathfindingService = game:GetService('PathfindingService')
+
+        game:GetService('PathfindingService')
+        game:GetService('PathfindingService')
+        game:GetService('PathfindingService')
+
+        local u17 = {}
+        local u18 = {
+            [Settings.mainAccount] = true,
+        }
+        local u19 = _TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
+
+        _Players.LocalPlayer.Idled:Connect(function()
+            _VirtualUser:CaptureController()
+            _VirtualUser:ClickButton2(Vector2.new())
+        end)
+
+        local function v29(p20, p21, p22, p23)
+            local v24 = u17
+            local v25 = p20:lower()
+            local v26 = {
+                description = p21,
+                handler = p22,
+            }
+            local v27
+
+            if p23 then
+                v27 = p23.mainOnly or false
+            else
+                v27 = false
+            end
+
+            v26.mainOnly = v27
+
+            local v28
+
+            if p23 then
+                v28 = p23.altOnly or false
+            else
+                v28 = false
+            end
+
+            v26.altOnly = v28
+            v26.authRequired = p23 and (p23.authRequired or true) or true
+            v26.ownerOnly = p23 and p23.ownerOnly or false
+            v24[v25] = v26
+        end
+
+        function option(p30, p31, p32, p33)
+            if SILENCE_NOTIFICATIONS then return end
+            u2:Notify({
+                Title = 'Punchys Alt Control',
+                Description = p30,
+            }, {
+                OutlineColor = p31,
+                Time = p32,
+                Type = 'option',
+            }, {
+                Image = 'rbxassetid://16754163547',
+                ImageColor = Color3.fromRGB(255, 84, 84),
+                Callback = function(p34)
+                    p33(p34)
+                end,
+            })
+        end
+        function notif(p35, p36, p37)
+            if SILENCE_NOTIFICATIONS then return end
+            u2:Notify({
+                Title = 'Punchys Alt Control',
+                Description = p35,
+            }, {
+                OutlineColor = p36,
+                Time = p37,
+                Type = 'Default',
+            })
+        end
+        function chat(p38)
+            if u19 then
+                _ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(p38, 'All')
+            else
+                _TextChatService.TextChannels.RBXGeneral:SendAsync(p38)
+            end
+        end
+
+        local function u40(p39)
+            return Settings.altAccounts[p39.Name] ~= nil
+        end
+
+        function isFirstAlt(p41)
+            return next(Settings.altAccounts) == p41.Name
+        end
+
+        local function u43(p42)
+            return u18[p42.Name] == true
+        end
+
+        function createAltControlOverlay()
+            local _ScreenGui = Instance.new('ScreenGui')
+
+            _ScreenGui.Name = 'AltControlOverlay'
+            _ScreenGui.IgnoreGuiInset = false
+            _ScreenGui.ResetOnSpawn = false
+
+            local _Frame = Instance.new('Frame')
+
+            _Frame.Size = UDim2.new(1, 0, 1, 0)
+            _Frame.Position = UDim2.new(0, 0, 0, 0)
+            _Frame.BackgroundColor3 = Color3.new(0, 0, 0)
+            _Frame.BorderSizePixel = 0
+            _Frame.Parent = _ScreenGui
+
+            local _TextLabel = Instance.new('TextLabel')
+
+            _TextLabel.Size = UDim2.new(0.5, 0, 0.5, 0)
+            _TextLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
+            _TextLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+            _TextLabel.BackgroundTransparency = 1
+            _TextLabel.Font = Enum.Font.GothamBold
+            _TextLabel.TextColor3 = Color3.new(1, 1, 1)
+            _TextLabel.TextScaled = true
+            _TextLabel.Text = 'Alt Control made by Punchy39\npunchingfella on discord\nDiscord.ggj4PgkQ72wp\ndsc.gg/botcontrol'
+            _TextLabel.Parent = _Frame
+            _ScreenGui.Parent = _LocalPlayer2:WaitForChild('PlayerGui')
+        end
+        function stopAllMovementLoops()
+            if u1.followLoop then
+                u1.followLoop:Disconnect()
+
+                u1.followLoop = nil
+            end
+            if u1.orbitLoop then
+                u1.orbitLoop:Disconnect()
+
+                u1.orbitLoop = nil
+            end
+            if u1.orbit2Loop then
+                u1.orbit2Loop:Disconnect()
+
+                u1.orbit2Loop = nil
+            end
+            if u1.orbit3Loop then
+                u1.orbit3Loop:Disconnect()
+
+                u1.orbit3Loop = nil
+            end
+            if u1.spiralLoop then
+                u1.spiralLoop:Disconnect()
+
+                u1.spiralLoop = nil
+            end
+            if u1.stalkLoop then
+                u1.stalkLoop:Disconnect()
+
+                u1.stalkLoop = nil
+            end
+            if u1.swarmLoop then
+                u1.swarmLoop:Disconnect()
+
+                u1.swarmLoop = nil
+            end
+            if u1.spiral2Loop then
+                u1.spiral2Loop:Disconnect()
+
+                u1.spiral2Loop = nil
+            end
+            if u1.stareLoop then
+                u1.stareLoop:Disconnect()
+
+                u1.stareLoop = nil
+            end
+            if u1.bangLoop then
+                u1.bangLoop:Disconnect()
+
+                u1.bangLoop = nil
+            end
+            if u1.wormLoop then
+                u1.wormLoop:Disconnect()
+
+                u1.wormLoop = nil
+            end
+            if u1.stackingLoop then
+                u1.stackingLoop:Disconnect()
+
+                u1.stackingLoop = nil
+            end
+            if u1.swarm2Loop then
+                u1.swarm2Loop:Disconnect()
+
+                u1.swarm2Loop = nil
+            end
+
+            u1.orbiting = false
+            u1.orbiting2 = false
+            u1.orbiting3 = false
+            u1.spiraling = false
+            u1.swarming = false
+            u1.spiraling2 = false
+            u1.staring = false
+            u1.wondering = false
+        end
+
+        local function u59(p47)
+            if not p47 then
+                return nil
+            end
+
+            local v48 = string.lower(p47)
+            local v49 = _Players
+            local v50, v51, v52 = ipairs(v49:GetPlayers())
+
+            while true do
+                local v53
+
+                v52, v53 = v50(v51, v52)
+
+                if v52 == nil then
+                    break
+                end
+                if string.lower(v53.Name) == v48 or string.lower(v53.DisplayName) == v48 then
+                    return v53
+                end
+            end
+
+            local v54 = _Players
+            local v55, v56, v57 = ipairs(v54:GetPlayers())
+
+            while true do
+                local v58
+
+                v57, v58 = v55(v56, v57)
+
+                if v57 == nil then
+                    break
+                end
+                if string.lower(v58.Name):find(v48) or string.lower(v58.DisplayName):find(v48) then
+                    return v58
+                end
+            end
+
+            notif('findPlayer failed to find player for query:', v48, Color3.fromRGB(255, 102, 0), 5)
+
+            return nil
+        end
+        local function u65()
+            local _Character = _LocalPlayer2.Character
+
+            if _Character then
+                local v61, v62, v63 = pairs(_Character:GetDescendants())
+
+                while true do
+                    local v64
+
+                    v63, v64 = v61(v62, v63)
+
+                    if v63 == nil then
+                        break
+                    end
+                    if v64:IsA('BasePart') then
+                        v64.Velocity = Vector3.zero
+                        v64.RotVelocity = Vector3.zero
+                    elseif v64:IsA('BodyVelocity') or v64:IsA('BodyAngularVelocity') then
+                        v64.Velocity = Vector3.zero
+                    elseif v64:IsA('BodyPosition') then
+                        v64.Position = v64.Position
+                    elseif v64:IsA('BodyGyro') then
+                        v64.CFrame = v64.CFrame
+                    end
+                end
+            end
+        end
+
+        print('[Debug] : Current player:', _LocalPlayer.Name)
+
+        if _LocalPlayer2.Name ~= Settings.mainAccount then
+            if u40(_LocalPlayer) then
+                print('[Debug] : Running as alt account')
+                --_RunService:Set3dRenderingEnabled(false)
+                if not SILENCE_NOTIFICATIONS then createAltControlOverlay() end
+                setfpscap(Settings.fpslimit)
+
+                UserSettings():GetService('UserGameSettings').MasterVolume = 0
+
+                local v66, v67, v68 = pairs(_Workspace2:GetDescendants())
+
+                while true do
+                    local v69, u70 = v66(v67, v68)
+
+                    if v69 == nil then
+                        break
+                    end
+
+                    v68 = v69
+
+                    if u70:IsA('Seat') or u70:IsA('VehicleSeat') then
+                        pcall(function()
+                            u70:Destroy()
+                        end)
+                    end
+                end
+
+                settings().Rendering.QualityLevel = 1
+                settings().Physics.PhysicsEnvironmentalThrottle = 1
+
+                local v71, v72, v73 = pairs(_Workspace2:GetDescendants())
+
+                while true do
+                    local v74, u75 = v71(v72, v73)
+
+                    if v74 == nil then
+                        break
+                    end
+
+                    v73 = v74
+
+                    if u75:IsA('ParticleEmitter') or (u75:IsA('Smoke') or (u75:IsA('Fire') or u75:IsA('Sparkles'))) then
+                        pcall(function()
+                            u75.Enabled = false
+                        end)
+                    end
+                end
+
+                notif('Loaded as alt! Discord.gg/j4PgkQ72wp', Color3.fromRGB(255, 102, 0), 6942069)
+            else
+                print('[Debug] : Running as non-alt account')
+            end
+        else
+            local _ScreenGui2 = Instance.new('ScreenGui')
+
+            _ScreenGui2.Name = 'CommandBarUI'
+            _ScreenGui2.Parent = _LocalPlayer:WaitForChild('PlayerGui')
+            _ScreenGui2.ResetOnSpawn = false
+
+            local _Frame2 = Instance.new('Frame')
+
+            _Frame2.Size = UDim2.new(0.4, 0, 0, 40)
+            _Frame2.Position = UDim2.new(0.3, 0, 1.1, 0)
+            _Frame2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+            _Frame2.BackgroundTransparency = 0.1
+            _Frame2.BorderSizePixel = 0
+            _Frame2.Visible = false
+            _Frame2.Parent = _ScreenGui2
+
+            local _UICorner = Instance.new('UICorner')
+
+            _UICorner.CornerRadius = UDim.new(0, 8)
+            _UICorner.Parent = _Frame2
+
+            local _Frame3 = Instance.new('Frame')
+
+            _Frame3.Size = UDim2.new(1, -20, 1, -10)
+            _Frame3.Position = UDim2.new(0, 10, 0, 5)
+            _Frame3.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            _Frame3.BackgroundTransparency = 0.1
+            _Frame3.BorderSizePixel = 0
+            _Frame3.ClipsDescendants = true
+            _Frame3.Parent = _Frame2
+
+            local _UICorner2 = Instance.new('UICorner')
+
+            _UICorner2.CornerRadius = UDim.new(0, 6)
+            _UICorner2.Parent = _Frame3
+
+            local _TextLabel2 = Instance.new('TextLabel')
+
+            _TextLabel2.Size = UDim2.new(1, -10, 1, 0)
+            _TextLabel2.Position = UDim2.new(0, 5, 0.5, 0)
+            _TextLabel2.AnchorPoint = Vector2.new(0, 0.5)
+            _TextLabel2.BackgroundTransparency = 1
+            _TextLabel2.TextColor3 = Color3.fromRGB(80, 80, 80)
+            _TextLabel2.Font = Enum.Font.GothamBold
+            _TextLabel2.TextSize = 18
+            _TextLabel2.TextXAlignment = Enum.TextXAlignment.Left
+            _TextLabel2.Parent = _Frame3
+
+            local _TextBox = Instance.new('TextBox')
+
+            _TextBox.Size = UDim2.new(1, -10, 1, 0)
+            _TextBox.Position = UDim2.new(0, 5, 0.5, 0)
+            _TextBox.AnchorPoint = Vector2.new(0, 0.5)
+            _TextBox.BackgroundTransparency = 1
+            _TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+            _TextBox.Font = Enum.Font.GothamBold
+            _TextBox.TextSize = 18
+            _TextBox.ClearTextOnFocus = false
+            _TextBox.PlaceholderText = 'Enter command...'
+            _TextBox.TextXAlignment = Enum.TextXAlignment.Left
+            _TextBox.Parent = _Frame3
+
+            local _Frame4 = Instance.new('Frame')
+
+            _Frame4.Size = UDim2.new(0.4, 0, 0, 140)
+            _Frame4.Position = UDim2.new(0.3, 0, 1, -190)
+            _Frame4.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+            _Frame4.BackgroundTransparency = 0.1
+            _Frame4.BorderSizePixel = 0
+            _Frame4.Visible = false
+            _Frame4.Parent = _ScreenGui2
+
+            local _UICorner3 = Instance.new('UICorner')
+
+            _UICorner3.CornerRadius = UDim.new(0, 8)
+            _UICorner3.Parent = _Frame4
+
+            local _TextLabel3 = Instance.new('TextLabel')
+
+            _TextLabel3.Size = UDim2.new(1, -20, 1, -10)
+            _TextLabel3.Position = UDim2.new(0, 10, 0, 5)
+            _TextLabel3.BackgroundTransparency = 1
+            _TextLabel3.TextColor3 = Color3.fromRGB(200, 200, 200)
+            _TextLabel3.Font = Enum.Font.Gotham
+            _TextLabel3.TextSize = 16
+            _TextLabel3.TextWrapped = true
+            _TextLabel3.TextXAlignment = Enum.TextXAlignment.Left
+            _TextLabel3.Parent = _Frame4
+
+            local u86 = false
+            local u87 = {}
+
+            local function u91(p88, p89, p90)
+                return _TweenService:Create(p88, TweenInfo.new(p90 or 0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), p89)
+            end
+            local function u93()
+                u86 = not u86
+                _Frame2.Visible = true
+
+                if u86 then
+                    u91(_Frame2, {
+                        Position = UDim2.new(0.3, 0, 1, -50),
+                    }):Play()
+
+                    _TextBox.Text = ''
+                    _TextLabel2.Text = ''
+
+                    task.wait(0.05)
+                    _TextBox:CaptureFocus()
+                else
+                    local v92 = u91(_Frame2, {
+                        Position = UDim2.new(0.3, 0, 1.1, 0),
+                    })
+
+                    v92:Play()
+                    v92.Completed:Connect(function()
+                        _Frame2.Visible = false
+                    end)
+                    _TextBox:ReleaseFocus()
+
+                    _Frame4.Visible = false
+                end
+            end
+            local function u103(p94)
+                local v95 = {}
+
+                if p94 ~= '' then
+                    local v96, v97, v98 = pairs(u17)
+
+                    while true do
+                        local v99
+
+                        v98, v99 = v96(v97, v98)
+
+                        if v98 == nil then
+                            break
+                        end
+                        if v98:lower():sub(1, #p94) == p94:lower() then
+                            local v100 = v99.args and (#v99.args > 0 and ' (args)' or '') or ''
+
+                            table.insert(v95, {
+                                full = v98,
+                                display = v98 .. v100,
+                            })
+                        end
+                    end
+
+                    table.sort(v95, function(p101, p102)
+                        return p101.full < p102.full
+                    end)
+                end
+
+                return v95
+            end
+            local function u108()
+                local _Text = _TextBox.Text
+
+                u87 = u103(_Text)
+
+                if #u87 <= 0 then
+                    _TextLabel2.Text = ''
+                else
+                    local _full = u87[1].full
+
+                    if #_Text <= 0 then
+                        _TextLabel2.Text = ''
+                    else
+                        _TextLabel2.Text = _Text .. _full:sub(#_Text + 1)
+                    end
+                end
+
+                local v106 = {}
+
+                for v107 = 1, math.min(#u87, 7)do
+                    v106[v107] = u87[v107].display
+                end
+
+                if #v106 <= 0 then
+                    _Frame4.Visible = false
+                else
+                    _TextLabel3.Text = table.concat(v106, '\n')
+                    _Frame4.Size = UDim2.new(0.4, 0, 0, #v106 * 20)
+                    _Frame4.Position = UDim2.new(0.3, 0, 1, -50 - #v106 * 20)
+                    _Frame4.Visible = true
+                end
+            end
+            local function u111()
+                if #u87 > 0 then
+                    local _Text2 = _TextBox.Text
+                    local _full2 = u87[1].full
+
+                    if _Text2 ~= '' and _full2:lower():sub(1, #_Text2) == _Text2:lower() then
+                        _TextBox.Text = _full2
+                        _TextBox.CursorPosition = #_full2 + 1
+
+                        u108()
+                    end
+                end
+            end
+
+            _UserInputService.InputBegan:Connect(function(p112, p113)
+                if u86 and not p113 then
+                    if p112.KeyCode == Enum.KeyCode.Tab then
+                        u111()
+
+                        return true
+                    end
+                end
+            end)
+            _UserInputService.InputBegan:Connect(function(p114, p115)
+                if not p115 then
+                    if p114.KeyCode == Enum.KeyCode.Quote then
+                        u93()
+                    end
+                end
+            end)
+            _TextBox.FocusLost:Connect(function(p116, p117)
+                if p117 and p117.KeyCode == Enum.KeyCode.Tab then
+                    task.wait()
+                    _TextBox:CaptureFocus()
+                elseif p116 then
+                    local _Text3 = _TextBox.Text
+
+                    _TextBox.Text = ''
+                    _Frame4.Visible = false
+
+                    u93()
+
+                    if _Text3 ~= '' then
+                        game.Players:Chat(Settings.prefix .. _Text3, 'All')
+                    end
+                end
+            end)
+
+            local v119 = _TextBox
+
+            _TextBox.GetPropertyChangedSignal(v119, 'Text'):Connect(function()
+                if _TextBox.Text:match('\t') then
+                    _TextBox.Text = _TextBox.Text:gsub('\t', '')
+                end
+
+                u108()
+            end)
+            print('[Debug] : Running as main account')
+            notif('Loaded as main! Discord.gg/j4PgkQ72wp', Color3.fromRGB(255, 102, 0), 5)
+        end
+
+        local function u124()
+            local v120, v121, v122 = pairs(Settings.altAccounts)
+            local v123 = 0
+
+            while true do
+                v122 = v120(v121, v122)
+
+                if v122 == nil then
+                    break
+                end
+
+                v123 = v123 + 1
+            end
+
+            return v123
+        end
+        local function u131()
+            local v125 = u124()
+            local v126, v127, v128 = pairs(Settings.altAccounts)
+            local v129 = 0
+
+            while true do
+                local v130
+
+                v128, v130 = v126(v127, v128)
+
+                if v128 == nil then
+                    break
+                end
+
+                v129 = v129 + 1
+
+                if v128 == _LocalPlayer2.Name then
+                    return v125 - v129 + 1
+                end
+            end
+
+            return 0
+        end
+        local function u142(p132, p133)
+            if p133:find('^' .. Settings.prefix) then
+                local _S, v135, v136 = p133:sub(2):gmatch('%S+')
+                local u137 = {}
+
+                while true do
+                    v136 = _S(v135, v136)
+
+                    if v136 == nil then
+                        break
+                    end
+
+                    table.insert(u137, v136)
+                end
+
+                if #u137 ~= 0 then
+                    local v138 = u137[1]:lower()
+
+                    table.remove(u137, 1)
+
+                    local u139 = u17[v138]
+
+                    if u139 then
+                        if u139.authRequired and not u43(p132) then
+                            print('[Debug] : Player is not authorized to use this command:', p132.Name)
+                        elseif u40(_LocalPlayer2) then
+                            task.spawn(function()
+                                local v140, v141 = pcall(function()
+                                    u139.handler(u137, p132)
+                                end)
+
+                                if not v140 then
+                                    warn('[Debug] : Command handler failed:', v141)
+                                end
+                            end)
+                        end
+                    else
+                        print('[Debug] : Command not found:', v138)
+                        notif('Command not found:' .. v138, Color3.fromRGB(255, 0, 0), 5)
+
+                        return
+                    end
+                else
+                    return
+                end
+            else
+                return
+            end
+        end
+
+        _Players.PlayerAdded:Connect(function(p143)
+            p143.Chatted:Connect(function(p144)
+                u142(p143, p144)
+            end)
+        end)
+
+        local v145 = _Players
+        local v146, v147, v148 = ipairs(_Players.GetPlayers(v145))
+        local u149 = u142
+
+        while true do
+            local u150
+
+            v148, u150 = v146(v147, v148)
+
+            if v148 == nil then
+                break
+            end
+
+            u150.Chatted:Connect(function(p151)
+                u149(u150, p151)
+            end)
+        end
+
+        v29('adduser', 'Adds a user to authorized list', function(p152, _)
+            local v153 = u59(table.concat(p152, ' '))
+
+            if v153 then
+                u18[v153.Name] = true
+
+                chat('Added ' .. v153.Name .. ' as an authorized user.')
+            end
+        end, {ownerOnly = true})
+        v29('removeuser', 'Removes a user from authorized list', function(p154, _)
+            local v155 = u59(table.concat(p154, ' '))
+
+            if v155 then
+                u18[v155.Name] = nil
+
+                chat('Removed ' .. v155.Name .. ' from authorized users.')
+            end
+        end, {ownerOnly = true})
+        v29('chat', 'Send chat message', function(p156)
+            chat(table.concat(p156, ' '))
+        end, {authRequired = true})
+        v29('jump', 'Make alt jump', function()
+            local _Humanoid = _LocalPlayer2.Character:FindFirstChild('Humanoid')
+
+            if _Humanoid then
+                _Humanoid.Jump = true
+            end
+        end, {authRequired = true})
+        v29('sit', 'Make alt sit', function()
+            _LocalPlayer2.Character.Humanoid.Sit = true
+        end, {authRequired = true})
+        v29('follow', 'Follow target player', function(p158)
+            local u159 = u59(table.concat(p158, ' ')) or _LocalPlayer2
+
+            if u1.followLoop then
+                u1.followLoop:Disconnect()
+
+                u1.followLoop = nil
+            end
+
+            u1.followLoop = _RunService2.Heartbeat:Connect(function()
+                if u159 and u159.Character and u159.Character:FindFirstChild('HumanoidRootPart') then
+                    local _HumanoidRootPart = u159.Character.HumanoidRootPart
+                    local _Character2 = _LocalPlayer2.Character
+
+                    if _Character2 and _Character2:FindFirstChild('Humanoid') then
+                        _Character2.Humanoid:MoveTo(_HumanoidRootPart.Position)
+                    end
+                else
+                    u1.followLoop:Disconnect()
+
+                    u1.followLoop = nil
+                end
+            end)
+        end, {authRequired = true})
+        v29('unfollow', 'Stop following', function()
+            if u1.followLoop then
+                u1.followLoop:Disconnect()
+
+                u1.followLoop = nil
+            end
+        end, {authRequired = true})
+        v29('wonder', 'Makes alts wonder randomly', function()
+            Settings.wondering = true
+
+            task.spawn(function()
+                while Settings.wondering and wait(math.random(1, 3)) do
+                    if _LocalPlayer2.Character and (_LocalPlayer2.Character:FindFirstChild('Humanoid') and _LocalPlayer2.Character:FindFirstChild('HumanoidRootPart')) then
+                        local v162 = _LocalPlayer2.Character.HumanoidRootPart.Position + Vector3.new(math.random(-20, 20), 0, math.random(-20, 20))
+
+                        _LocalPlayer2.Character.Humanoid:MoveTo(v162)
+                    end
+                end
+            end)
+        end, {authRequired = true})
+        v29('fwonder', 'Makes alts wonder randomly but follows the first alt', function()
+            local v163, v164, v165 = pairs(Settings.altAccounts)
+            local v166 = {}
+
+            while true do
+                local v167
+
+                v165, v167 = v163(v164, v165)
+
+                if v165 == nil then
+                    break
+                end
+
+                table.insert(v166, v165)
+            end
+
+            Settings.wonderLeader = v166[1]
+
+            if _LocalPlayer2.Name ~= SettingswonderLeader then
+                local v168, v169, v170 = ipairs(v166)
+                local v171 = 0
+
+                while true do
+                    local v172
+
+                    v170, v172 = v168(v169, v170)
+
+                    if v170 == nil then
+                        v170 = v171
+
+                        break
+                    end
+                    if v172 == _LocalPlayer2.Name then
+                        break
+                    end
+                end
+
+                local u173
+
+                if v170 > 1 then
+                    u173 = _Players2:FindFirstChild(v166[v170 - 1])
+                else
+                    u173 = nil
+                end
+                if u173 then
+                    Settings.wondering = true
+                    Settings.wonderFollowLoop = _RunService2.Heartbeat:Connect(function()
+                        if Settings.wondering and _LocalPlayer2.Character and (_LocalPlayer2.Character:FindFirstChild('Humanoid') and u173.Character and u173.Character:FindFirstChild('HumanoidRootPart')) then
+                            local _Position = _LocalPlayer2.Character.HumanoidRootPart.Position
+                            local _Position2 = u173.Character.HumanoidRootPart.Position
+                            local v176 = _Position2 - (_Position2 - _Position).Unit * 3
+
+                            _LocalPlayer2.Character.Humanoid:MoveTo(v176)
+                        end
+                    end)
+                end
+            else
+                Settings.wondering = true
+
+                task.spawn(function()
+                    while Settings.wondering and wait(math.random(2, 4)) do
+                        if _LocalPlayer2.Character and (_LocalPlayer2.Character:FindFirstChild('Humanoid') and _LocalPlayer2.Character:FindFirstChild('HumanoidRootPart')) then
+                            local v177 = _LocalPlayer2.Character.HumanoidRootPart.Position + Vector3.new(math.random(-20, 20), 0, math.random(-20, 20))
+
+                            _LocalPlayer2.Character.Humanoid:MoveTo(v177)
+                        end
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('unwonder', 'Makes alts stop woondering/fwondering', function()
+            Settings.wondering = false
+
+            if Settings.wonderFollowLoop then
+                Settings.wonderFollowLoop:Disconnect()
+
+                Settings.wonderFollowLoop = nil
+            end
+        end, {authRequired = true})
+        v29('worm', 'Makes bots follow the player in a train-like pattern', function(p178)
+            stopAllMovementLoops()
+
+            local v179 = u59(table.concat(p178, ' ')) or _LocalPlayer2
+
+            if v179 and u40(_LocalPlayer2) then
+                local v180, v181, v182 = pairs(Settings.altAccounts)
+                local v183 = {}
+
+                while true do
+                    local v184
+
+                    v182, v184 = v180(v181, v182)
+
+                    if v182 == nil then
+                        break
+                    end
+
+                    table.insert(v183, v182)
+                end
+
+                local v185, v186, v187 = ipairs(v183)
+                local v188 = 0
+
+                while true do
+                    local v189
+
+                    v187, v189 = v185(v186, v187)
+
+                    if v187 == nil then
+                        v187 = v188
+
+                        break
+                    end
+                    if v189 == _LocalPlayer2.Name then
+                        break
+                    end
+                end
+
+                local u190 = v187 == 1 and v179 and v179 or game.Players:FindFirstChild(v183[v187 - 1])
+
+                if u190 then
+                    u1.wormLoop = _RunService2.Heartbeat:Connect(function()
+                        local _Character3 = _LocalPlayer2.Character
+                        local _Character4 = u190.Character
+
+                        if _Character3 and (_Character4 and (_Character3:FindFirstChild('Humanoid') and (_Character3:FindFirstChild('HumanoidRootPart') and _Character4:FindFirstChild('HumanoidRootPart')))) then
+                            local _HumanoidRootPart2 = _Character3.HumanoidRootPart
+                            local _HumanoidRootPart3 = _Character4.HumanoidRootPart
+                            local v195 = 3
+
+                            if v195 < (_HumanoidRootPart2.Position - _HumanoidRootPart3.Position).Magnitude then
+                                _Character3.Humanoid:MoveTo(_HumanoidRootPart3.Position - _HumanoidRootPart3.CFrame.LookVector * v195)
+                            end
+                        end
+                    end)
+                end
+            end
+        end, {authRequired = true})
+        v29('unworm', 'Stops the worm follow', function()
+            if Settings.wormLoop then
+                Settings.wormLoop:Disconnect()
+
+                Settings.wormLoop = nil
+            end
+        end, {authRequired = true})
+        v29('walkto', 'Makes the alts walk to a player', function(p196)
+            local v197 = u59(table.concat(p196, ' ')) or _LocalPlayer2
+
+            if v197 and u40(_LocalPlayer2) then
+                local _Character5 = _LocalPlayer2.Character
+
+                if _Character5 and (_Character5:FindFirstChild('Humanoid') and v197.Character) and v197.Character:FindFirstChild('HumanoidRootPart') then
+                    _Character5.Humanoid:MoveTo(v197.Character.HumanoidRootPart.Position)
+                end
+            end
+        end, {authRequired = true})
+        v29('pf', 'Pathfinds to a player and walks to them', function(p199)
+            stopAllMovementLoops()
+            table.remove(p199, 1)
+
+            local v200 = u59((table.concat(p199, ' '))) or _LocalPlayer
+
+            if v200 and u40(_LocalPlayer2) then
+                local _Character6 = _LocalPlayer2.Character
+                local u202
+
+                if _Character6 then
+                    u202 = _Character6:FindFirstChild('Humanoid')
+                else
+                    u202 = _Character6
+                end
+
+                local u203
+
+                if _Character6 then
+                    u203 = _Character6:FindFirstChild('HumanoidRootPart')
+                else
+                    u203 = _Character6
+                end
+
+                local _Character7 = v200.Character
+                local u205
+
+                if _Character7 then
+                    u205 = _Character7:FindFirstChild('HumanoidRootPart')
+                else
+                    u205 = _Character7
+                end
+                if u202 and (u203 and u205) then
+                    local u206 = 4
+                    local u207 = 2.5
+                    local u208 = 10
+                    local u209 = 3
+                    local u210 = 2
+                    local u211 = 5
+                    local _Position3 = u203.Position
+                    local u213 = 0
+                    local u214 = 0
+                    local u215 = false
+
+                    local function u220()
+                        local _Position4 = u203.Position
+                        local v217 = u203.CFrame.LookVector * u211
+                        local v218 = RaycastParams.new()
+
+                        v218.FilterType = Enum.RaycastFilterType.Blacklist
+                        v218.FilterDescendantsInstances = {_Character6}
+
+                        local v219 = _Workspace2:Raycast(_Position4, v217, v218)
+
+                        if v219 and v219.Instance.CanCollide then
+                            u202.Jump = true
+                            u215 = true
+
+                            task.wait(0.1)
+                        end
+                    end
+                    local function v221()
+                        return _PathfindingService:CreatePath({
+                            AgentRadius = 2.5,
+                            AgentHeight = 5,
+                            AgentCanJump = true,
+                            AgentCanClimb = true,
+                            WaypointSpacing = 3,
+                            Costs = {
+                                Water = 50,
+                                Wall = 100,
+                            },
+                        })
+                    end
+                    local function u223(p222)
+                        if (p222 - _Position3).Magnitude >= 0.1 then
+                            u213 = 0
+                        else
+                            u213 = u213 + _RunService.Heartbeat:Wait()
+
+                            if u210 < u213 then
+                                u202.Jump = true
+                                u213 = 0
+
+                                return true
+                            end
+                        end
+
+                        _Position3 = p222
+
+                        return false
+                    end
+
+                    if u202.Sit then
+                        u202.Jump = true
+
+                        task.wait(0.1)
+                    end
+
+                    local u224 = v221()
+
+                    if Settings.pathfindingLoop then
+                        Settings.pathfindingLoop:Disconnect()
+
+                        Settings.pathfindingLoop = nil
+                    end
+
+                    local function u227()
+                        local v225, v226 = pcall(function()
+                            u224:ComputeAsync(u203.Position, u205.Position)
+                        end)
+
+                        if v225 and u224.Status == Enum.PathStatus.Success then
+                            u214 = 0
+
+                            return u224:GetWaypoints()
+                        end
+
+                        notif('Path computation failed:', v226, Color3.fromRGB(255, 0, 0))
+
+                        u214 = u214 + 1
+
+                        return nil
+                    end
+
+                    local u228 = u227()
+
+                    if u228 then
+                        local u229 = 1
+
+                        u1.pathfindingLoop = _RunService.Heartbeat:Connect(function()
+                            if _Character6:IsDescendantOf(_Workspace2) and (_Character7:IsDescendantOf(_Workspace2) and u209 > u214) then
+                                local v230 = u228[u229]
+
+                                if v230 then
+                                    local _Magnitude = (u203.Position - v230.Position).Magnitude
+                                    local _Magnitude2 = (u203.Position - u205.Position).Magnitude
+
+                                    if v230.Position.Y > u203.Position.Y + u207 then
+                                        u202.Jump = true
+                                    end
+                                    if u223(u203.Position) then
+                                        u220()
+                                    end
+
+                                    u202:MoveTo(v230.Position)
+
+                                    if v230.Action == Enum.PathWaypointAction.Jump then
+                                        u202.Jump = true
+                                    end
+                                    if _Magnitude < u206 then
+                                        u229 = u229 + 1
+                                        u228 = (u229 > #u228 or u208 < _Magnitude2) and u227()
+
+                                        if u228 then
+                                            u229 = 1
+                                        end
+                                    end
+                                end
+                            else
+                                u1.pathfindingLoop:Disconnect()
+
+                                return
+                            end
+                        end)
+                    end
+                else
+                    return
+                end
+            else
+                return
+            end
+        end, {authRequired = true})
+        v29('rline', 'Line up bots to the right of target', function(p233, p234)
+            local v235 = table.concat(p233, ' ')
+
+            if v235 ~= '' then
+                p234 = u59(v235) or p234
+            end
+            if p234 and p234.Character and p234.Character:FindFirstChild('HumanoidRootPart') then
+                local v236 = u131()
+
+                u65()
+
+                local v237 = p234.Character.HumanoidRootPart.CFrame * CFrame.new(4 * v236, 0, 0)
+
+                _LocalPlayer2.Character.HumanoidRootPart.CFrame = v237
+            end
+        end, {authRequired = true})
+        v29('lline', 'Line up bots to the left of target', function(p238, p239)
+            local v240 = table.concat(p238, ' ')
+
+            if v240 ~= '' then
+                p239 = u59(v240) or p239
+            end
+            if p239 and p239.Character and p239.Character:FindFirstChild('HumanoidRootPart') then
+                local v241 = u131()
+
+                u65()
+
+                local v242 = p239.Character.HumanoidRootPart.CFrame * CFrame.new(-4 * v241, 0, 0)
+
+                _LocalPlayer2.Character.HumanoidRootPart.CFrame = v242
+            end
+        end, {authRequired = true})
+        v29('bline', 'Line up bots behind target', function(p243, p244)
+            local v245 = table.concat(p243, ' ')
+
+            if v245 ~= '' then
+                p244 = u59(v245) or p244
+            end
+            if p244 and p244.Character and p244.Character:FindFirstChild('HumanoidRootPart') then
+                local v246 = u131()
+
+                u65()
+
+                local v247 = p244.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1 * v246)
+
+                _LocalPlayer2.Character.HumanoidRootPart.CFrame = v247
+            end
+        end, {authRequired = true})
+        v29('circle', 'Arrange bots in a circle around the target player', function(p248, p249)
+            local v250 = table.concat(p248, ' ')
+
+            if v250 ~= '' then
+                p249 = u59(v250) or p249
+            end
+            if p249 and p249.Character and p249.Character:FindFirstChild('HumanoidRootPart') then
+                local v251 = u131()
+                local v252, v253, v254 = pairs(Settings.altAccounts)
+                local v255 = 0
+                local v256 = 10
+
+                while true do
+                    v254 = v252(v253, v254)
+
+                    if v254 == nil then
+                        break
+                    end
+
+                    v255 = v255 + 1
+                end
+
+                if v255 == 0 then
+                    return
+                end
+
+                u65()
+
+                local v257 = (v251 - 1) / v255 * (2 * math.pi)
+                local v258 = CFrame.new(v256 * math.cos(v257), 0, v256 * math.sin(v257))
+                local v259 = p249.Character.HumanoidRootPart.CFrame * v258
+                local v260 = CFrame.lookAt(v259.Position, p249.Character.HumanoidRootPart.Position)
+
+                _LocalPlayer2.Character.HumanoidRootPart.CFrame = v260
+            end
+        end, {authRequired = true})
+        v29('bring', 'Brings alt to the command issuer', function(_, p261)
+            if p261 and p261.Character and p261.Character:FindFirstChild('HumanoidRootPart') then
+                _LocalPlayer2.Character.HumanoidRootPart.CFrame = p261.Character.HumanoidRootPart.CFrame
+
+                u65()
+            end
+        end, {authRequired = true})
+        v29('goto', 'Teleport to a player', function(p262)
+            local v263 = u59(table.concat(p262, ' ')) or _LocalPlayer2
+
+            if v263 and v263.Character and v263.Character:FindFirstChild('HumanoidRootPart') then
+                _LocalPlayer2.Character.HumanoidRootPart.CFrame = v263.Character.HumanoidRootPart.CFrame
+
+                u65()
+            end
+        end, {authRequired = true})
+        v29('stare', 'Make alt stare at a player', function(p264)
+            local v265 = u59(table.concat(p264, ' ')) or _LocalPlayer2
+
+            if v265 then
+                if u1.stareLoop then
+                    u1.stareLoop:Disconnect()
+
+                    u1.stareLoop = nil
+                end
+
+                u1.staring = true
+                u1.currentStareTarget = v265
+                u1.stareLoop = _RunService2.Heartbeat:Connect(function()
+                    if u1.staring and _LocalPlayer2.Character and (_LocalPlayer2.Character:FindFirstChild('HumanoidRootPart') and u1.currentStareTarget.Character and u1.currentStareTarget.Character:FindFirstChild('HumanoidRootPart')) then
+                        local v266 = CFrame.new(_LocalPlayer2.Character.HumanoidRootPart.Position, u1.currentStareTarget.Character.HumanoidRootPart.Position)
+
+                        _LocalPlayer2.Character.HumanoidRootPart.CFrame = v266
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('unstare', 'Stop staring at a player', function()
+            u1.staring = false
+            u1.currentStareTarget = nil
+
+            if u1.stareLoop then
+                u1.stareLoop:Disconnect()
+
+                u1.stareLoop = nil
+            end
+        end, {authRequired = true})
+        v29('re', 'Resets the alt (BreakJoints)', function()
+            if _LocalPlayer2.Character then
+                _LocalPlayer2.Character:BreakJoints()
+            end
+        end, {authRequired = true})
+        v29('forcereset', 'Force reset alt (Destroy Character)', function()
+            if _LocalPlayer2.Character then
+                _LocalPlayer2.Character:Destroy()
+            end
+        end, {authRequired = true})
+        v29('quit', 'Forces the alt to quit', function()
+            chat('Quitting...')
+            wait(1)
+            game:Shutdown()
+        end, {authRequired = true})
+        v29('stackon', 'Stack bots on a target player', function(p267)
+            stopAllMovementLoops()
+
+            local u268 = u59(table.concat(p267, ' ')) or _LocalPlayer2
+
+            if u268 and u40(_LocalPlayer2) then
+                local v269, v270, v271 = pairs(Settings.altAccounts)
+                local u272 = 0
+
+                while true do
+                    local v273
+
+                    v271, v273 = v269(v270, v271)
+
+                    if v271 == nil then
+                        break
+                    end
+
+                    u272 = u272 + 1
+
+                    if v271 == _LocalPlayer2.Name then
+                        break
+                    end
+                end
+
+                if u1.stackPlatform then
+                    u1.stackPlatform:Destroy()
+                end
+
+                local _Part = Instance.new('Part')
+
+                _Part.Size = Vector3.new(6, 1, 6)
+                _Part.Name = 'StackPlatform'
+                _Part.Anchored = true
+                _Part.CanCollide = true
+                _Part.Transparency = 0.7
+                _Part.BrickColor = BrickColor.new('Really blue')
+                _Part.Parent = _Workspace2
+                u1.stackPlatform = _Part
+
+                if u1.stackingLoop then
+                    u1.stackingLoop:Disconnect()
+                end
+
+                u1.stackingLoop = _RunService2.Heartbeat:Connect(function()
+                    if _LocalPlayer2.Character and u268.Character and (_LocalPlayer2.Character:FindFirstChild('HumanoidRootPart') and u268.Character:FindFirstChild('HumanoidRootPart')) then
+                        local v275 = u268.Character.HumanoidRootPart.CFrame * CFrame.new(0, 5 * u272, 0)
+
+                        _LocalPlayer2.Character.HumanoidRootPart.CFrame = v275
+                        _Part.CFrame = v275 * CFrame.new(0, -3, 0)
+
+                        u65()
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('unstack', 'Unstack all bots', function()
+            if u40(_LocalPlayer2) then
+                if u1.stackingLoop then
+                    u1.stackingLoop:Disconnect()
+
+                    u1.stackingLoop = nil
+                end
+                if u1.stackPlatform then
+                    u1.stackPlatform:Destroy()
+
+                    u1.stackPlatform = nil
+                end
+            end
+        end, {authRequired = true})
+        v29('bang', 'Smoothly move back and forth behind target', function(p276)
+            stopAllMovementLoops()
+
+            local u277 = u59(table.concat(p276, ' ')) or UserUser
+
+            if u277 and u40(_LocalPlayer2) then
+                u1.banging = true
+
+                local u278 = 2
+                local u279 = 7
+                local u280 = 1
+                local u281 = 0.03
+
+                task.spawn(function()
+                    if _LocalPlayer2.Character and u277.Character then
+                        _LocalPlayer2.Character.HumanoidRootPart.CFrame = u277.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, u278)
+                    end
+
+                    local v282 = tick()
+
+                    while u1.banging and wait(u281) do
+                        if _LocalPlayer2.Character and u277.Character then
+                            local v283 = tick() - v282
+                            local v284 = math.sin(v283 * u279) * u280
+                            local _CFrame = u277.Character.HumanoidRootPart.CFrame
+
+                            _LocalPlayer2.Character.HumanoidRootPart.CFrame = _CFrame * CFrame.new(0, 0, u278 + v284)
+
+                            u65()
+                        end
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('unbang', 'Stop the bang actions', function()
+            if u40(_LocalPlayer2) then
+                u1.banging = false
+
+                if bang and type(bang.Stop) == 'function' then
+                    bang:Stop()
+                end
+                if bangAnim and bangAnim.Destroy then
+                    bangAnim:Destroy()
+                end
+                if bangDied and bangDied.Disconnect then
+                    bangDied:Disconnect()
+                end
+                if bangLoop and bangLoop.Disconnect then
+                    bangLoop:Disconnect()
+                end
+
+                bangLoop = nil
+                bangDied = nil
+                bangAnim = nil
+                bang = nil
+
+                stopAllMovementLoops()
+
+                local _Character8 = _LocalPlayer2.Character
+
+                if _Character8 and _Character8.PrimaryPart then
+                    _Character8.PrimaryPart.Velocity = Vector3.zero
+                    _Character8.PrimaryPart.RotVelocity = Vector3.zero
+                end
+            end
+        end, {authRequired = true})
+        v29('orbit', 'Make bot orbit around target', function(p287)
+            stopAllMovementLoops()
+
+            local u288 = u59(table.concat(p287, ' ')) or _LocalPlayer2
+
+            if u288 and u40(_LocalPlayer2) then
+                if u1.orbitLoop then
+                    u1.orbitLoop:Disconnect()
+
+                    u1.orbitLoop = nil
+                end
+
+                u1.orbitRadius = u1.orbitRadius or 10
+                u1.orbitSpeed = u1.orbitSpeed or 0.5
+
+                local v289, v290, v291 = pairs(Settings.altAccounts)
+                local v292 = 0
+                local v293 = 0
+
+                while true do
+                    local v294
+
+                    v291, v294 = v289(v290, v291)
+
+                    if v291 == nil then
+                        break
+                    end
+
+                    v292 = v292 + 1
+
+                    if v291 == _LocalPlayer2.Name then
+                        v293 = v292
+                    end
+                end
+
+                local u295 = 2 * math.pi / v292 * (v293 - 1)
+
+                u1.orbiting = true
+
+                task.spawn(function()
+                    while u1.orbiting and _RunService2.RenderStepped:Wait() do
+                        if _LocalPlayer2.Character and u288.Character and (_LocalPlayer2.Character:FindFirstChild('HumanoidRootPart') and u288.Character:FindFirstChild('HumanoidRootPart')) then
+                            local _Position5 = u288.Character.HumanoidRootPart.Position
+                            local v297 = u295 + u1.orbitSpeed * os.clock()
+                            local v298 = Vector3.new(_Position5.X + u1.orbitRadius * math.cos(v297), _Position5.Y, _Position5.Z + u1.orbitRadius * math.sin(v297))
+
+                            _LocalPlayer2.Character.HumanoidRootPart.CFrame = CFrame.new(v298, _Position5)
+
+                            u65()
+                        end
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('unorbit', 'Stop orbiting target', function()
+            if u40(_LocalPlayer2) then
+                u1.orbiting = false
+
+                if u1.orbitLoop then
+                    u1.orbitLoop:Disconnect()
+
+                    u1.orbitLoop = nil
+                end
+            end
+        end, {authRequired = true})
+        v29('orbit2', 'Orbit around a target in a different way', function(p299)
+            stopAllMovementLoops()
+
+            local u300 = u59(table.concat(p299, ' ')) or _LocalPlayer2
+
+            if u300 and u40(_LocalPlayer2) then
+                if u1.orbit2Loop then
+                    u1.orbit2Loop:Disconnect()
+
+                    u1.orbit2Loop = nil
+                end
+
+                u1.orbitRadius = u1.orbitRadius or 10
+                u1.orbitSpeed = u1.orbitSpeed or 0.5
+
+                local v301, v302, v303 = pairs(Settings.altAccounts)
+                local v304 = 0
+                local v305 = 0
+
+                while true do
+                    local v306
+
+                    v303, v306 = v301(v302, v303)
+
+                    if v303 == nil then
+                        break
+                    end
+
+                    v304 = v304 + 1
+
+                    if v303 == _LocalPlayer2.Name then
+                        v305 = v304
+                    end
+                end
+
+                local u307 = 360 / v304 * (v305 - 1)
+
+                _Workspace.Gravity = 0
+                u1.orbiting2 = true
+
+                task.spawn(function()
+                    local v308 = u307
+
+                    while u1.orbiting2 and _RunService2.Heartbeat:Wait() do
+                        if _LocalPlayer2.Character and u300.Character and (_LocalPlayer2.Character:FindFirstChild('HumanoidRootPart') and u300.Character:FindFirstChild('HumanoidRootPart')) then
+                            u65()
+
+                            local v309 = CFrame.new(u300.Character.HumanoidRootPart.Position) * CFrame.Angles(math.rad(v308), math.rad(v308), 0) * CFrame.new(u1.orbitRadius, 0, 0)
+
+                            _LocalPlayer2.Character.HumanoidRootPart.CFrame = v309
+
+                            local v310 = CFrame.new(_LocalPlayer2.Character.HumanoidRootPart.Position, u300.Character.HumanoidRootPart.Position)
+
+                            _LocalPlayer2.Character.HumanoidRootPart.CFrame = v310
+                            v308 = (v308 + u1.orbitSpeed) % 360
+                        end
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('spiral', 'Spiral movement around target', function(p311)
+            stopAllMovementLoops()
+
+            local u312 = u59(table.concat(p311, ' ')) or _LocalPlayer2
+
+            if u312 and u40(_LocalPlayer2) then
+                if u1.spiralLoop then
+                    u1.spiralLoop:Disconnect()
+
+                    u1.spiralLoop = nil
+                end
+
+                u1.spiralRadius = u1.spiralRadius or 6
+                u1.spiralSpeed = u1.spiralSpeed or 0.3
+
+                local u313 = 15
+                local u314 = 0
+                local u315 = 0
+                local u316 = true
+
+                u1.spiraling = true
+
+                task.spawn(function()
+                    local v317 = 0
+
+                    while u1.spiraling and _RunService2.Heartbeat:Wait() do
+                        if _LocalPlayer2.Character and u312.Character and (_LocalPlayer2.Character:FindFirstChild('HumanoidRootPart') and u312.Character:FindFirstChild('HumanoidRootPart')) then
+                            u65()
+
+                            if u316 then
+                                u315 = u315 + u1.spiralSpeed
+
+                                if u313 <= u315 then
+                                    u316 = false
+                                end
+                            else
+                                u315 = u315 - u1.spiralSpeed
+
+                                if u315 <= u314 then
+                                    u316 = true
+                                end
+                            end
+
+                            local _Position6 = u312.Character.HumanoidRootPart.Position
+                            local _Position7 = (CFrame.new(_Position6) * CFrame.Angles(0, math.rad(v317), 0) * CFrame.new(u1.spiralRadius, u315, 0)).Position
+
+                            _LocalPlayer2.Character.HumanoidRootPart.CFrame = CFrame.new(_Position7, Vector3.new(_Position6.X, _Position7.Y, _Position6.Z))
+                            v317 = (v317 + u1.spiralSpeed * 2) % 360
+                        end
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('spiral2', 'Make bot spiral in a different way around target', function(p320)
+            stopAllMovementLoops()
+
+            local u321 = u59(table.concat(p320, ' ')) or _LocalPlayer2
+
+            if u321 and u40(_LocalPlayer2) then
+                u1.spiraling2 = false
+
+                wait(0.1)
+
+                if u1.spiral2Loop then
+                    u1.spiral2Loop:Disconnect()
+
+                    u1.spiral2Loop = nil
+                end
+
+                u1.spiralRadius = u1.spiralRadius or 6
+                u1.spiralSpeed = u1.spiralSpeed or 0.3
+
+                local v322, v323, v324 = pairs(Settings.altAccounts)
+                local v325 = 0
+                local u326 = 0
+
+                while true do
+                    local v327, _ = v322(v323, v324)
+
+                    if v327 == nil then
+                        break
+                    end
+
+                    v324 = v327
+                    v325 = v325 + 1
+
+                    if v327 == _LocalPlayer2.Name then
+                        u326 = v325
+                    end
+                end
+
+                local u328 = 15
+                local u329 = 0
+                local u330 = u326 <= 1 and 0 or (u326 - 1) * -1
+                local u331 = true
+
+                _Workspace.Gravity = 0
+                u1.spiraling2 = true
+
+                task.spawn(function()
+                    local v332 = (u326 - 1) * 2
+                    local v333 = 0
+
+                    while u1.spiraling2 and _RunService2.Heartbeat:Wait() do
+                        local _Character9 = _LocalPlayer2.Character
+
+                        if _Character9 then
+                            _Character9 = _Character9:FindFirstChild('HumanoidRootPart')
+                        end
+
+                        local _Character10 = u321.Character
+
+                        if _Character10 then
+                            _Character10 = _Character10:FindFirstChild('HumanoidRootPart')
+                        end
+                        if _Character9 and _Character10 then
+                            u65()
+
+                            if u331 then
+                                u330 = u330 + u1.spiralSpeed
+
+                                if u328 <= u330 then
+                                    u331 = false
+                                end
+                            else
+                                u330 = u330 - u1.spiralSpeed
+
+                                if u330 <= u329 then
+                                    u331 = true
+                                end
+                            end
+
+                            local _Position8 = _Character10.Position
+                            local _Position9 = (CFrame.new(_Position8) * CFrame.Angles(0, math.rad(v333), 0) * CFrame.new(u1.spiralRadius, u330, -v332)).Position
+
+                            _Character9.CFrame = CFrame.new(_Position9, Vector3.new(_Position8.X, _Position9.Y, _Position8.Z))
+                            v333 = (v333 + u1.spiralSpeed * 2) % 360
+                        end
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('unspiral', 'Stop all spiral movements', function()
+            if u40(_LocalPlayer2) then
+                u1.spiraling = false
+                u1.spiraling2 = false
+
+                if u1.spiralLoop then
+                    u1.spiralLoop:Disconnect()
+
+                    u1.spiralLoop = nil
+                end
+                if u1.spiral2Loop then
+                    u1.spiral2Loop:Disconnect()
+
+                    u1.spiral2Loop = nil
+                end
+
+                game.Workspace.Gravity = 196.2
+
+                if _LocalPlayer2.Character and _LocalPlayer2.Character:FindFirstChild('Humanoid') then
+                    _LocalPlayer2.Character.Humanoid.PlatformStand = false
+                end
+            end
+        end, {authRequired = true})
+        v29('spiralspeed', 'Set the speed of the spiral movement', function(p338)
+            local v339 = tonumber(p338[1])
+
+            if v339 and u40(_LocalPlayer2) then
+                u1.spiralSpeed = v339
+            end
+        end, {authRequired = true})
+        v29('spiralradius', 'Set the radius of the spiral movement', function(p340)
+            local v341 = tonumber(p340[1])
+
+            if v341 and u40(_LocalPlayer2) then
+                u1.spiralRadius = v341
+            end
+        end, {authRequired = true})
+        v29('unorbit', 'Stop all orbit movements', function()
+            if u40(_LocalPlayer2) then
+                u1.orbiting = false
+                u1.orbiting2 = false
+                u1.orbiting3 = false
+
+                if u1.orbitLoop then
+                    u1.orbitLoop:Disconnect()
+
+                    u1.orbitLoop = nil
+                end
+                if u1.orbit2Loop then
+                    u1.orbit2Loop:Disconnect()
+
+                    u1.orbit2Loop = nil
+                end
+
+                _Workspace.Gravity = 196.2
+
+                if _LocalPlayer2.Character and _LocalPlayer2.Character:FindFirstChild('Humanoid') then
+                    _LocalPlayer2.Character.Humanoid.PlatformStand = false
+                end
+            end
+        end, {authRequired = true})
+        v29('orbitradius', 'Set the orbit radius', function(p342)
+            local v343 = tonumber(p342[1])
+
+            if v343 and u40(_LocalPlayer2) then
+                u1.orbitRadius = v343
+                u1.orbit2Radius = v343
+            end
+        end, {authRequired = true})
+        v29('orbitspeed', 'Set the orbit speed', function(p344)
+            local v345 = tonumber(p344[1])
+
+            if v345 and u40(_LocalPlayer2) then
+                u1.orbitSpeed = v345
+                u1.orbit2Speed = v345
+            end
+        end, {authRequired = true})
+        v29('dance1', 'Perform dance1 animation', function()
+            if u40(_LocalPlayer2) then
+                game.Players:Chat('/e dance1')
+            end
+        end, {authRequired = true})
+        v29('dance2', 'Perform dance2 animation', function()
+            if u40(_LocalPlayer2) then
+                game.Players:Chat('/e dance2')
+            end
+        end, {authRequired = true})
+        v29('dance3', 'Perform dance3 animation', function()
+            if u40(_LocalPlayer2) then
+                game.Players:Chat('/e dance3')
+            end
+        end, {authRequired = true})
+        v29('point', 'Perform point animation', function()
+            if u40(_LocalPlayer2) then
+                game.Players:Chat('/e point')
+            end
+        end, {authRequired = true})
+        v29('cheer', 'Perform cheer animation', function()
+            if u40(_LocalPlayer2) then
+                game.Players:Chat('/e cheer')
+            end
+        end, {authRequired = true})
+        v29('wave', 'Perform wave animation', function()
+            if u40(_LocalPlayer2) then
+                game.Players:Chat('/e wave')
+            end
+        end, {authRequired = true})
+        v29('laugh', 'Perform laugh animation', function()
+            if u40(_LocalPlayer2) then
+                game.Players:Chat('/e laugh')
+            end
+        end, {authRequired = true})
+        v29('float', 'Make the alt float at a certain height', function(p346)
+            local u347 = tonumber(p346[1]) or 1
+
+            if u40(_LocalPlayer2) then
+                local _Character11 = _LocalPlayer2.Character
+                local u349 = _Character11 and _Character11:FindFirstChild('HumanoidRootPart')
+
+                if u349 then
+                    u1.floating = true
+                    game.Workspace.Gravity = 0
+
+                    if u1.floatPlatform then
+                        u1.floatPlatform:Destroy()
+                    end
+
+                    u1.floatPlatform = Instance.new('Part')
+                    u1.floatPlatform.Size = Vector3.new(2, 0.1, 2)
+                    u1.floatPlatform.Anchored = true
+                    u1.floatPlatform.CanCollide = true
+                    u1.floatPlatform.Transparency = 0.5
+                    u1.floatPlatform.Parent = _Workspace2
+
+                    if u1.floatConnection then
+                        u1.floatConnection:Disconnect()
+                    end
+                    if not u1.initialFloatY then
+                        u1.initialFloatY = u349.Position.Y
+                    end
+
+                    u1.floatConnection = _RunService2.Heartbeat:Connect(function()
+                        if u1.floating then
+                            local _Rotation = u349.CFrame.Rotation
+                            local v351 = Vector3.new(u349.Position.X, u1.initialFloatY + u347, u349.Position.Z)
+
+                            u349.CFrame = CFrame.new(v351) * _Rotation
+                            u349.Velocity = Vector3.new(0, 0, 0)
+                            u1.floatPlatform.CFrame = CFrame.new(u349.Position.X, u1.initialFloatY + u347 - 3, u349.Position.Z)
+                        else
+                            u1.floatConnection:Disconnect()
+
+                            if u1.floatPlatform then
+                                u1.floatPlatform:Destroy()
+
+                                u1.floatPlatform = nil
+                            end
+
+                            u1.initialFloatY = nil
+                            game.Workspace.Gravity = 196.2
+                        end
+                    end)
+                end
+            end
+        end, {authRequired = true})
+        v29('unfloat', 'Stop floating and return gravity to normal', function()
+            if u40(_LocalPlayer2) then
+                u1.floating = false
+                u1.initialFloatY = nil
+
+                if u1.floatPlatform then
+                    u1.floatPlatform:Destroy()
+
+                    u1.floatPlatform = nil
+                end
+
+                _Workspace.Gravity = 196.2
+            end
+        end, {authRequired = true})
+        v29('spin', 'Make the alt spin at a set speed', function(p352)
+            local v353 = tonumber(p352[1]) or 1
+
+            if u40(_LocalPlayer2) then
+                u1.spinning = true
+                u1.spinSpeed = v353
+
+                local _Character12 = _LocalPlayer2.Character
+                local u355 = _Character12 and _Character12:FindFirstChild('HumanoidRootPart')
+
+                if u355 then
+                    if u1.spinConnection then
+                        u1.spinConnection:Disconnect()
+                    end
+
+                    u1.spinConnection = _RunService2.Heartbeat:Connect(function()
+                        if u1.spinning then
+                            u355.CFrame = u355.CFrame * CFrame.Angles(0, math.rad(u1.spinSpeed), 0)
+                        else
+                            u1.spinConnection:Disconnect()
+
+                            u1.spinConnection = nil
+                        end
+                    end)
+                end
+            end
+        end, {authRequired = true})
+        v29('unspin', 'Stop spinning', function()
+            if u40(_LocalPlayer2) then
+                u1.spinning = false
+
+                if u1.spinConnection then
+                    u1.spinConnection:Disconnect()
+
+                    u1.spinConnection = nil
+                end
+            end
+        end, {authRequired = true})
+        v29('stalk', 'Teleport behind a player while facing them', function(p356)
+            stopAllMovementLoops()
+
+            local u357 = u59(table.concat(p356, ' ')) or _LocalPlayer2
+
+            if u357 and u40(_LocalPlayer2) then
+                if u1.stalkLoop then
+                    u1.stalkLoop:Disconnect()
+
+                    u1.stalkLoop = nil
+                end
+
+                u1.stalking = true
+                u1.stalkLoop = _RunService2.Heartbeat:Connect(function()
+                    local _Character13 = _LocalPlayer2.Character
+                    local _Character14 = u357.Character
+
+                    if _Character13 and (_Character14 and (_Character13:FindFirstChild('HumanoidRootPart') and _Character14:FindFirstChild('HumanoidRootPart'))) then
+                        local _Position10 = _Character13.HumanoidRootPart.Position
+                        local _Position11 = _Character14.HumanoidRootPart.Position
+
+                        if (_Position10 - _Position11).Magnitude > 30 then
+                            local v362 = _Position11 + _Character14.HumanoidRootPart.CFrame.LookVector * -5 + Vector3.new(math.random(-6.5, 6.5), 0, math.random(-6.5, 6.5))
+
+                            _Character13.HumanoidRootPart.CFrame = CFrame.new(v362, _Position11)
+                        end
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('unstalk', 'Stop teleporting behind the target', function()
+            if u40(_LocalPlayer2) then
+                u1.stalking = false
+
+                if u1.stalkLoop then
+                    u1.stalkLoop:Disconnect()
+
+                    u1.stalkLoop = nil
+                end
+            end
+        end, {authRequired = true})
+        v29('check', "Check the bot's position in the alt list", function()
+            if u40(_LocalPlayer2) then
+                local v363, v364, v365 = pairs(Settings.altAccounts)
+                local v366 = 0
+
+                while true do
+                    local v367
+
+                    v365, v367 = v363(v364, v365)
+
+                    if v365 == nil then
+                        break
+                    end
+
+                    v366 = v366 + 1
+
+                    if v365 == _LocalPlayer2.Name then
+                        break
+                    end
+                end
+
+                chat("I'm bot " .. v366 .. '!')
+            end
+        end, {authRequired = true})
+        v29('helicopter', 'Make the alt orbit the target while spinning like a helicopter', function(p368)
+            stopAllMovementLoops()
+
+            local u369 = u59(table.concat(p368, ' ')) or _LocalPlayer2
+
+            if u369 and u40(_LocalPlayer2) then
+                if u1.helicopterLoop then
+                    u1.helicopterLoop:Disconnect()
+
+                    u1.helicopterLoop = nil
+                end
+
+                u1.helicopterRadius = u1.helicopterRadius or 3
+                u1.helicopterSpeed = u1.helicopterSpeed or 1
+
+                local v370, v371, v372 = pairs(Settings.altAccounts)
+                local v373 = 0
+                local u374 = 0
+                local u375 = 0
+
+                while true do
+                    local v376
+
+                    v372, v376 = v370(v371, v372)
+
+                    if v372 == nil then
+                        break
+                    end
+
+                    v373 = v373 + 1
+
+                    if v372 == _LocalPlayer2.Name then
+                        u375 = v373
+                    end
+                end
+
+                local u377 = 2 * math.pi / v373
+
+                u1.helicoptering = true
+                _Workspace.Gravity = 0
+
+                task.spawn(function()
+                    while u1.helicoptering and _RunService2.Heartbeat:Wait() do
+                        if _LocalPlayer2.Character and (_LocalPlayer2.Character:FindFirstChild('HumanoidRootPart') and u369.Character and u369.Character:FindFirstChild('Head')) then
+                            local v378 = u374 + u377 * (u375 - 1)
+                            local _Position12 = u369.Character.Head.Position
+                            local v380 = Vector3.new(_Position12.X + u1.helicopterRadius * math.cos(v378), _Position12.Y, _Position12.Z + u1.helicopterRadius * math.sin(v378))
+                            local v381 = CFrame.lookAt(v380, _Position12) * CFrame.Angles(math.pi / 2, 0, 0)
+
+                            _LocalPlayer2.Character.HumanoidRootPart.CFrame = v381
+
+                            u65()
+
+                            u374 = u374 + u1.helicopterSpeed * 0.1
+                        end
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('unhelicopter', 'Stop helicopter movement', function()
+            if u40(_LocalPlayer2) then
+                u1.helicoptering = false
+
+                if u1.helicopterLoop then
+                    u1.helicopterLoop:Disconnect()
+
+                    u1.helicopterLoop = nil
+                end
+
+                _Workspace.Gravity = 196.2
+            end
+        end, {authRequired = true})
+        v29('helicopterspeed', 'Set the helicopter rotation speed', function(p382)
+            local v383 = tonumber(p382[1])
+
+            if v383 and u40(_LocalPlayer2) then
+                u1.helicopterSpeed = v383
+            end
+        end, {authRequired = true})
+        v29('helicopterradius', 'Set the helicopter orbit radius', function(p384)
+            local v385 = tonumber(p384[1])
+
+            if v385 and u40(_LocalPlayer2) then
+                u1.helicopterRadius = v385
+            end
+        end, {authRequired = true})
+        v29('credits', 'Show credits for the script', function()
+            if u40(_LocalPlayer2) then
+                chat('Thanks to punchy39 on Roblox And My Friend TheGirlOofBoi for testing for this alt control! (punchingfella on Blue app) Server: gg')
+                chat('/j4PgkQ72wp')
+            end
+        end, {authRequired = true})
+        v29('totalcmds', 'Display the total number of available commands', function()
+            if u40(_LocalPlayer2) then
+                local v386, v387, v388 = pairs(u17)
+                local v389 = 0
+
+                while true do
+                    v388 = v386(v387, v388)
+
+                    if v388 == nil then
+                        break
+                    end
+
+                    v389 = v389 + 1
+                end
+
+                chat('This script has ' .. v389 .. ' commands!')
+            end
+        end, {authRequired = true})
+        v29('swarm', 'Make alts swarm around a target player', function(p390)
+            stopAllMovementLoops()
+
+            local u391 = u59((table.concat(p390, ' '))) or _LocalPlayer
+
+            if u391 and u40(_LocalPlayer2) then
+                u1.swarming = true
+
+                task.spawn(function()
+                    while u1.swarming do
+                        local v396, v397 = pcall(function()
+                            local v392 = u391
+
+                            if v392 then
+                                v392 = u391.Character
+                            end
+                            if v392 then
+                                v392 = v392:FindFirstChild('HumanoidRootPart')
+                            end
+
+                            local _Character15 = _LocalPlayer2.Character
+                            local v394
+
+                            if _Character15 then
+                                v394 = _Character15:FindFirstChild('HumanoidRootPart')
+                            else
+                                v394 = _Character15
+                            end
+                            if _Character15 then
+                                _Character15 = _Character15:FindFirstChild('Humanoid')
+                            end
+                            if v392 and (v394 and _Character15) then
+                                local v395 = Vector3.new(math.random(-7, 7), 0, math.random(-7, 7))
+
+                                _Character15:MoveTo(v392.Position + v395)
+                            end
+                        end)
+
+                        if not v396 then
+                            warn('[Debug]: Swarm error:', v397)
+
+                            break
+                        end
+
+                        wait(0.3)
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('swarm2', 'Make alts swarm around a target player in a wider, more erratic dome pattern', function(p398)
+            stopAllMovementLoops()
+
+            local u399 = u59((table.concat(p398, ' '))) or _LocalPlayer
+
+            if u399 and u40(_LocalPlayer2) then
+                u1.swarming2 = true
+                game.Workspace.Gravity = 0
+
+                local _Character16 = _LocalPlayer2.Character
+                local u401
+
+                if _Character16 then
+                    u401 = _Character16:FindFirstChild('HumanoidRootPart')
+                else
+                    u401 = _Character16
+                end
+                if _Character16 then
+                    _Character16 = _Character16:FindFirstChild('Humanoid')
+                end
+                if u401 and _Character16 then
+                    _Character16.PlatformStand = true
+
+                    local function u407(p402)
+                        local v403 = 15
+                        local v404 = 10
+                        local v405 = math.random() * math.pi * 2
+                        local v406 = math.random() * v404
+
+                        return p402 + Vector3.new(v403 * math.cos(v405) * math.sqrt(1 - (v406 / v404) ^ 2), v406, v403 * math.sin(v405) * math.sqrt(1 - (v406 / v404) ^ 2))
+                    end
+
+                    local u408 = u407(u399.Character.HumanoidRootPart.Position)
+                    local u409 = 25
+                    local u410 = 1.5
+
+                    u1.swarm2Loop = _RunService2.Heartbeat:Connect(function()
+                        if u1.swarming2 and (u399.Character and u399.Character.Parent) then
+                            if (u399.Character.HumanoidRootPart.Position - u408).Magnitude > 25 then
+                                u408 = u407(u399.Character.HumanoidRootPart.Position)
+                                u409 = math.random(20, 30)
+                            end
+
+                            local _Position13 = u401.Position
+                            local v412 = u408
+
+                            if (_Position13 - v412).Magnitude <= u410 then
+                                u408 = u407(u399.Character.HumanoidRootPart.Position)
+                                u409 = math.random(20, 30)
+
+                                task.wait(math.random(0.1, 0.5))
+                            end
+
+                            local _Unit = ((v412 - _Position13).Unit + Vector3.new(math.random(-0.3, 0.3), math.random(-0.2, 0.2), math.random(-0.3, 0.3))).Unit
+                            local v414 = _RunService2.Heartbeat:Wait()
+                            local v415 = _Unit * u409 * v414
+                            local v416 = Vector3.new(v412.X + math.random(-3, 3), v412.Y + math.random(-2, 2), v412.Z + math.random(-3, 3))
+
+                            u401.CFrame = CFrame.lookAt(_Position13 + v415, v416)
+                        end
+                    end)
+                end
+            end
+        end, {authRequired = true})
+        v29('unswarm', 'Stop all swarm movements', function()
+            if u40(_LocalPlayer2) then
+                u1.swarming = false
+                u1.swarming2 = false
+
+                if u1.swarm2Loop then
+                    u1.swarm2Loop:Disconnect()
+
+                    u1.swarm2Loop = nil
+                end
+
+                _Workspace.Gravity = 196.2
+
+                local _Character17 = _LocalPlayer2.Character
+
+                if _Character17 then
+                    local _Humanoid2 = _Character17:FindFirstChild('Humanoid')
+
+                    if _Humanoid2 then
+                        _Humanoid2.PlatformStand = false
+                    end
+
+                    u65()
+                end
+            end
+        end, {authRequired = true})
+        v29('firework', 'Make the alt spin and launch upward like a firework', function()
+            if u40(_LocalPlayer2) then
+                stopAllMovementLoops()
+
+                local _Character18 = _LocalPlayer2.Character
+                local v420
+
+                if _Character18 then
+                    v420 = _Character18:FindFirstChild('HumanoidRootPart')
+                else
+                    v420 = _Character18
+                end
+                if _Character18 then
+                    _Character18 = _Character18:FindFirstChildWhichIsA('Humanoid')
+                end
+                if v420 and _Character18 then
+                    local _BodyAngularVelocity = Instance.new('BodyAngularVelocity')
+
+                    _BodyAngularVelocity.AngularVelocity = Vector3.new(0, 30, 0)
+                    _BodyAngularVelocity.MaxTorque = Vector3.new(0, math.huge, 0)
+                    _BodyAngularVelocity.Parent = v420
+                    v420.AssemblyLinearVelocity = Vector3.new(0, 200, 0)
+
+                    local v422 = os.clock()
+
+                    while os.clock() - v422 < 0.8 and (v420 and v420.Parent) do
+                        v420.CFrame = v420.CFrame * CFrame.Angles(0, math.rad(10), 0)
+
+                        task.wait()
+                    end
+
+                    _Character18.Health = 0
+
+                    _BodyAngularVelocity:Destroy()
+
+                    _Workspace.Gravity = 196.2
+                end
+            end
+        end, {authRequired = true})
+        v29('stop', 'Stop all movements, reset alt, and restore physics', function()
+            if u40(_LocalPlayer2) then
+                stopAllMovementLoops()
+
+                local v423, v424, v425 = pairs({
+                    'InternalVars.pathfindingLoop',
+                    'InternalVars.wonderFollowLoop',
+                    'InternalVars.wormLoop',
+                    'InternalVars.stackingLoop',
+                    'InternalVars.swarm2Loop',
+                    'InternalVars.floatConnection',
+                    'InternalVars.helicopterLoop',
+                })
+
+                while true do
+                    local v426
+
+                    v425, v426 = v423(v424, v425)
+
+                    if v425 == nil then
+                        break
+                    end
+                    if u1[v426] then
+                        u1[v426]:Disconnect()
+
+                        u1[v426] = nil
+                    end
+                end
+
+                local v427, v428, v429 = pairs({
+                    'InternalVars.stackPlatform',
+                    'InternalVars.floatPlatform',
+                })
+
+                while true do
+                    local v430
+
+                    v429, v430 = v427(v428, v429)
+
+                    if v429 == nil then
+                        break
+                    end
+                    if u1[v430] then
+                        u1[v430]:Destroy()
+
+                        u1[v430] = nil
+                    end
+                end
+
+                if u1.bang then
+                    u1.bang:Stop()
+
+                    u1.bang = nil
+                end
+                if u1.bangAnim then
+                    u1.bangAnim:Destroy()
+
+                    u1.bangAnim = nil
+                end
+                if u1.bangDied then
+                    u1.bangDied:Disconnect()
+
+                    u1.bangDied = nil
+                end
+
+                u1.banging = false
+                u1.floating = false
+                u1.spinning = false
+                u1.helicoptering = false
+                u1.swarming2 = false
+
+                if u1.flingSpinVelocity then
+                    u1.flingSpinVelocity:Destroy()
+
+                    u1.flingSpinVelocity = nil
+                end
+                if u1.flingFollowLoop then
+                    u1.flingFollowLoop:Disconnect()
+
+                    u1.flingFollowLoop = nil
+                end
+                if u1.fling2Loop then
+                    u1.fling2Loop:Disconnect()
+
+                    u1.fling2Loop = nil
+                end
+
+                _Workspace.Gravity = 196.2
+
+                if _LocalPlayer2.Character then
+                    local v431, v432, v433 = pairs(_LocalPlayer2.Character:GetDescendants())
+
+                    while true do
+                        local v434
+
+                        v433, v434 = v431(v432, v433)
+
+                        if v433 == nil then
+                            break
+                        end
+                        if v434:IsA('BasePart') then
+                            v434.CanCollide = true
+                        end
+                    end
+
+                    local _Humanoid3 = _LocalPlayer2.Character:FindFirstChild('Humanoid')
+
+                    if _Humanoid3 then
+                        _Humanoid3.PlatformStand = false
+                    end
+
+                    u65()
+                end
+            end
+        end, {authRequired = true})
+        v29('orbit3', 'Make the alt orbit around a target in a tilted ring pattern', function(p436)
+            stopAllMovementLoops()
+
+            local u437 = u59((table.concat(p436, ' '))) or _LocalPlayer
+
+            if u437 and u40(_LocalPlayer2) then
+                u1.orbiting3 = false
+
+                wait(0.1)
+
+                local v438, v439, v440 = pairs(Settings.altAccounts)
+                local v441 = 0
+                local v442 = 0
+
+                while true do
+                    local v443, _ = v438(v439, v440)
+
+                    if v443 == nil then
+                        break
+                    end
+
+                    v440 = v443
+                    v441 = v441 + 1
+
+                    if v443 == _LocalPlayer2.Name then
+                        v442 = v441
+                    end
+                end
+
+                if v442 == 0 then
+                    return
+                end
+
+                local u444 = 10
+                local u445 = 2
+                local u446 = v442 / v441 * math.pi
+                local u447 = math.random() * (2 * math.pi)
+
+                _Workspace.Gravity = 0
+                u1.orbiting3 = true
+
+                task.spawn(function()
+                    local v448 = u447
+
+                    while u1.orbiting3 do
+                        local _Character19 = _LocalPlayer2.Character
+
+                        if _Character19 then
+                            _Character19 = _Character19:FindFirstChild('HumanoidRootPart')
+                        end
+
+                        local _Character20 = u437.Character
+
+                        if _Character20 then
+                            _Character20 = _Character20:FindFirstChild('HumanoidRootPart')
+                        end
+                        if _Character19 and _Character20 then
+                            local v451 = u444 * math.cos(v448)
+                            local v452 = u444 * math.sin(v448)
+                            local v453 = math.sin(u446) * v452
+                            local v454 = math.cos(u446) * v452
+                            local v455 = _Character20.Position + Vector3.new(v451, v453, v454)
+
+                            _Character19.CFrame = CFrame.new(v455, _Character20.Position)
+                            v448 = v448 + math.rad(u445)
+                        end
+
+                        u65()
+                        _RunService2.Heartbeat:Wait()
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('spam', 'Make the alt spam a message in chat', function(p456)
+            if u40(_LocalPlayer2) then
+                table.remove(p456, 1)
+
+                local u457 = table.concat(p456, ' ')
+
+                if u457 and not u1.spamming then
+                    u1.spamming = true
+
+                    task.spawn(function()
+                        while u1.spamming and u40(_LocalPlayer2) do
+                            chat(u457)
+                            wait(u1.spamSpeed)
+                        end
+
+                        u1.spamming = false
+                    end)
+                end
+            end
+        end, {authRequired = true})
+        v29('unspam', 'Stop spamming messages in chat', function()
+            if u40(_LocalPlayer2) then
+                u1.spamming = false
+            end
+        end, {authRequired = true})
+        v29('spamspeed', 'Set the delay between spam messages', function(p458)
+            table.remove(p458, 1)
+
+            local v459 = tonumber(p458[1])
+
+            if v459 and u40(_LocalPlayer2) then
+                u1.spamSpeed = math.max(0.1, v459)
+            end
+        end, {authRequired = true})
+        v29('info', 'Displays information about a command', function(p460, _)
+            local v461 = table.concat(p460, ' '):lower()
+
+            if v461 == '' then
+                return
+            else
+                local v462 = u17[v461]
+
+                if v462 then
+                    if next(Settings.altAccounts) == _LocalPlayer2.Name then
+                        chat(v461 .. ': ' .. v462.description)
+                    end
+                end
+            end
+        end, {authRequired = true})
+        v29('nuke', 'Make all bots divebomb a target spinning', function(p463, _)
+            local v464 = table.concat(p463, ' ')
+            local v465 = v464 ~= '' and u59(v464) or nil
+
+            if v465 and v465.Character and v465.Character:FindFirstChild('HumanoidRootPart') then
+                local _Position14 = v465.Character.HumanoidRootPart.Position
+                local v467 = _Players
+                local v468, v469, v470 = pairs(v467:GetPlayers())
+                local v471 = 100
+                local u472 = 10
+                local u473 = 1
+
+                while true do
+                    local u474
+
+                    v470, u474 = v468(v469, v470)
+
+                    if v470 == nil then
+                        break
+                    end
+                    if u40(u474) and u474.Character and u474.Character:FindFirstChild('HumanoidRootPart') then
+                        local _HumanoidRootPart4 = u474.Character.HumanoidRootPart
+
+                        u474.Character:FindFirstChild('Humanoid')
+
+                        _HumanoidRootPart4.CFrame = CFrame.new(_Position14 + Vector3.new(0, v471, 0)) * CFrame.Angles(math.rad(90), 0, 0)
+
+                        local _BodyAngularVelocity2 = Instance.new('BodyAngularVelocity')
+
+                        _BodyAngularVelocity2.AngularVelocity = Vector3.new(0, 150, 0)
+                        _BodyAngularVelocity2.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+                        _BodyAngularVelocity2.Parent = _HumanoidRootPart4
+
+                        task.spawn(function()
+                            while _HumanoidRootPart4.Position.Y > _Position14.Y + u472 do
+                                task.wait()
+                            end
+
+                            _HumanoidRootPart4.CFrame = CFrame.new(_Position14 + Vector3.new(0, u473, 0)) * CFrame.Angles(math.rad(90), 0, 0)
+
+                            task.wait(0.25)
+
+                            if u474.Character then
+                                u474.Character:BreakJoints()
+                            end
+
+                            task.wait(0.1)
+                            _BodyAngularVelocity2:Destroy()
+                        end)
+                    end
+                end
+            end
+        end, {authRequired = true})
+        v29('fling', 'Fling a target by following them and spinning on all axes', function(p477, _)
+            local v478 = table.concat(p477, ' ')
+            local u479 = v478 ~= '' and u59(v478) or nil
+
+            if u479 and u479.Character and u479.Character:FindFirstChild('HumanoidRootPart') then
+                local _HumanoidRootPart5 = u479.Character.HumanoidRootPart
+                local v481 = _RunService2
+                local v482, v483, v484 = pairs(game.Players:GetPlayers())
+
+                while true do
+                    local v485
+
+                    v484, v485 = v482(v483, v484)
+
+                    if v484 == nil then
+                        break
+                    end
+                    if u40(v485) and v485.Character and v485.Character:FindFirstChild('HumanoidRootPart') then
+                        local _Character21 = v485.Character
+                        local _HumanoidRootPart6 = _Character21.HumanoidRootPart
+                        local _Humanoid4 = _Character21:FindFirstChild('Humanoid')
+
+                        if u1.flingLoop then
+                            u1.flingLoop:Disconnect()
+
+                            u1.flingLoop = nil
+                        end
+                        if _Humanoid4 then
+                            _Humanoid4.PlatformStand = false
+                        end
+
+                        local v489, v490, v491 = pairs(_Character21:GetDescendants())
+
+                        while true do
+                            local v492
+
+                            v491, v492 = v489(v490, v491)
+
+                            if v491 == nil then
+                                break
+                            end
+                            if v492:IsA('BasePart') then
+                                v492.CanCollide = false
+                                v492.CanTouch = false
+                                v492.CanQuery = false
+                                v492.Massless = true
+                            end
+                        end
+
+                        local _BodyAngularVelocity3 = Instance.new('BodyAngularVelocity')
+
+                        _BodyAngularVelocity3.AngularVelocity = Vector3.new(99999, 99999, 99999)
+                        _BodyAngularVelocity3.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+                        _BodyAngularVelocity3.P = math.huge
+                        _BodyAngularVelocity3.Parent = _HumanoidRootPart6
+                        u1.flingLoop = v481.Heartbeat:Connect(function()
+                            if _Character21:IsDescendantOf(_Workspace2) and u479.Character:IsDescendantOf(_Workspace2) then
+                                _HumanoidRootPart6.CFrame = _HumanoidRootPart5.CFrame
+                                _HumanoidRootPart6.Velocity = Vector3.new(99999, 99999, 99999)
+                                _HumanoidRootPart6.RotVelocity = Vector3.new(99999, 99999, 99999)
+
+                                local v494 = _Character21
+                                local v495, v496, v497 = pairs(v494:GetDescendants())
+
+                                while true do
+                                    local v498
+
+                                    v497, v498 = v495(v496, v497)
+
+                                    if v497 == nil then
+                                        break
+                                    end
+                                    if v498:IsA('BasePart') then
+                                        v498.CanCollide = false
+                                    end
+                                end
+                            else
+                                u1.flingLoop:Disconnect()
+                                _BodyAngularVelocity3:Destroy()
+                            end
+                        end)
+                    end
+                end
+            end
+        end, {authRequired = true})
+        v29('fling2', 'Flings a player using physics manipulation', function(p499, _)
+            local v500 = table.concat(p499, ' ')
+            local v501 = v500 ~= '' and u59(v500) or nil
+
+            if v501 and v501.Character and v501.Character:FindFirstChild('HumanoidRootPart') then
+                local _HumanoidRootPart7 = v501.Character.HumanoidRootPart
+                local v503, v504, v505 = pairs(game.Players:GetPlayers())
+
+                while true do
+                    local v506
+
+                    v505, v506 = v503(v504, v505)
+
+                    if v505 == nil then
+                        break
+                    end
+                    if u40(v506) and v506.Character and v506.Character:FindFirstChild('HumanoidRootPart') then
+                        local _HumanoidRootPart8 = v506.Character.HumanoidRootPart
+                        local _CFrame2 = _HumanoidRootPart8.CFrame
+                        local _Velocity = _HumanoidRootPart8.Velocity
+                        local v510, v511, v512 = pairs(v506.Character:GetDescendants())
+
+                        while true do
+                            local v513
+
+                            v512, v513 = v510(v511, v512)
+
+                            if v512 == nil then
+                                break
+                            end
+                            if v513:IsA('BasePart') then
+                                v513.CanCollide = false
+                            end
+                        end
+
+                        _HumanoidRootPart8.Velocity = Vector3.new(0, 500, 0)
+
+                        task.wait(0.2)
+
+                        _HumanoidRootPart8.Velocity = (_HumanoidRootPart7.Position - _HumanoidRootPart8.Position).Unit * 100 + Vector3.new(0, 50, 0)
+
+                        local v514 = tick()
+
+                        repeat
+                            task.wait()
+                        until (_HumanoidRootPart7.Position - _HumanoidRootPart8.Position).Magnitude >= 60 or tick() - v514 >= 2.5
+
+                        task.wait(0.5)
+
+                        _HumanoidRootPart8.Velocity = _Velocity
+                        _HumanoidRootPart8.CFrame = _CFrame2
+                    end
+                end
+            end
+        end, {authRequired = true})
+        v29('unfling', 'Stops all flinging actions and restores collisions', function()
+            if u1.flingSpinVelocity then
+                u1.flingSpinVelocity:Destroy()
+
+                u1.flingSpinVelocity = nil
+            end
+            if u1.flingBotHRP then
+                u1.flingBotHRP.Velocity = Vector3.zero
+            end
+            if u1.flingFollowLoop then
+                u1.flingFollowLoop:Disconnect()
+
+                u1.flingFollowLoop = nil
+            end
+
+            u65()
+
+            if u1.fling2Loop then
+                u1.fling2Loop:Disconnect()
+
+                u1.fling2Loop = nil
+            end
+            if bot.Character:FindFirstChild('HumanoidRootPart') then
+                local _HumanoidRootPart9 = bot.Character.HumanoidRootPart
+
+                if _HumanoidRootPart9:FindFirstChild('BodyVelocity') then
+                    _HumanoidRootPart9.BodyVelocity:Destroy()
+                end
+
+                _HumanoidRootPart9.Velocity = Vector3.zero
+            end
+
+            local v516, v517, v518 = pairs(game.Players:GetPlayers())
+
+            while true do
+                local v519
+
+                v518, v519 = v516(v517, v518)
+
+                if v518 == nil then
+                    break
+                end
+                if u40(v519) and v519.Character then
+                    local v520, v521, v522 = pairs(v519.Character:GetDescendants())
+
+                    while true do
+                        local v523
+
+                        v522, v523 = v520(v521, v522)
+
+                        if v522 == nil then
+                            break
+                        end
+                        if v523:IsA('BasePart') then
+                            v523.CanCollide = true
+                        end
+                    end
+                end
+            end
+        end, {authRequired = true})
+        v29('npc', 'Makes bots act like NPCs', function()
+            local v524, v525, v526 = pairs(game.Players:GetPlayers())
+            local u527 = {}
+            local u528 = {
+                'Hmm... I should go this way.',
+                'I love this game!',
+                'Have you seen my hat?',
+                "I'm just an NPC.",
+                'What a nice day!',
+                'I need to find the shop.',
+                'I wonder where this leads...',
+                'Excuse me, coming through.',
+                'I swear I just saw something weird...',
+                'This place gives me the creeps.',
+                "I think I'm lost.",
+                'Oops, wrong way!',
+                'HOLY MOLY IS THAT JOHN DOE',
+            }
+            local u529 = {
+                '/e dance',
+                '/e wave',
+                '/e cheer',
+                '/e point',
+                '/e laugh',
+            }
+            local v530 = {}
+
+            while true do
+                local u531
+
+                v526, u531 = v524(v525, v526)
+
+                if v526 == nil then
+                    break
+                end
+                if u40(u531) and u531.Character and u531.Character:FindFirstChild('Humanoid') then
+                    local _Humanoid5 = u531.Character:FindFirstChildOfClass('Humanoid')
+                    local _HumanoidRootPart10 = u531.Character.HumanoidRootPart
+
+                    u527[u531] = {
+                        moving = false,
+                        busy = false,
+                        lastAction = 0,
+                        currentDestination = nil,
+                    }
+                    v530[u531] = _RunService2.Heartbeat:Connect(function()
+                        if not u531.Character or (not _Humanoid5 or _Humanoid5.Health <= 0) then
+                            return
+                        end
+                        if u527[u531].busy then
+                            return
+                        end
+
+                        local v534 = tick()
+                        local v535 = math.random()
+                        local v536 = 12 + math.random(-4, 4)
+
+                        if v534 - u527[u531].lastAction > math.random(3, 8) then
+                            u527[u531].busy = true
+
+                            if v535 <= 0.15 then
+                                chat(u528[math.random(#u528)])
+                                task.wait(2)
+                            elseif v535 <= 0.3 then
+                                game.Players:Chat(u529[math.random(#u529)])
+                                task.wait(3)
+                            else
+                                local v537 = Vector3.new(math.random(-50, 50), 0, math.random(-50, 50))
+                                local v538 = _HumanoidRootPart10.Position + v537
+
+                                _Humanoid5.WalkSpeed = v536
+
+                                _Humanoid5:MoveTo(v538)
+
+                                u527[u531].moving = true
+                                u527[u531].currentDestination = v538
+
+                                local v539 = tick()
+
+                                while u527[u531].moving do
+                                    task.wait(1)
+
+                                    if (_HumanoidRootPart10.Position - v538).Magnitude < 4 then
+                                        u527[u531].moving = false
+
+                                        break
+                                    end
+                                    if tick() - v539 >= 15 then
+                                        u527[u531].moving = false
+
+                                        break
+                                    end
+                                end
+                            end
+
+                            u527[u531].lastAction = tick()
+                            u527[u531].busy = false
+                            u527[u531].moving = false
+                        end
+                        if u527[u531].moving and math.random() < 0.2 then
+                            _Humanoid5.WalkSpeed = v536 + math.random(-2, 2)
+                        end
+                    end)
+                end
+            end
+
+            u1.npcLoops = v530
+        end, {authRequired = true})
+        v29('unnpc', 'Stops NPC mode for all bots', function()
+            if u1.npcLoops then
+                local v540, v541, v542 = pairs(u1.npcLoops)
+
+                while true do
+                    local v543
+
+                    v542, v543 = v540(v541, v542)
+
+                    if v542 == nil then
+                        break
+                    end
+
+                    v543:Disconnect()
+
+                    if v542.Character then
+                        local _Humanoid6 = v542.Character:FindFirstChildOfClass('Humanoid')
+
+                        if _Humanoid6 then
+                            _Humanoid6.Sit = false
+                            _Humanoid6.WalkSpeed = 16
+                        end
+                    end
+                end
+
+                u1.npcLoops = nil
+            end
+        end, {authRequired = true})
+        v29('elevator', 'Creates an elevator platform of alts beneath the target', function(p545, p546)
+            local v547 = table.concat(p545, ' ')
+
+            if v547 ~= '' then
+                p546 = u59(v547) or p546
+            end
+            if p546 and p546.Character and p546.Character:FindFirstChild('HumanoidRootPart') then
+                local _HumanoidRootPart11 = p546.Character.HumanoidRootPart
+                local v549, v550, v551 = pairs(game.Players:GetPlayers())
+                local v552 = {}
+                local v553 = 3
+                local u554 = 1
+
+                while true do
+                    local v555
+
+                    v551, v555 = v549(v550, v551)
+
+                    if v551 == nil then
+                        break
+                    end
+                    if u40(v555) and v555.Character and v555.Character:FindFirstChild('HumanoidRootPart') then
+                        table.insert(v552, v555)
+                    end
+                end
+
+                local v556, v557, v558 = ipairs(v552)
+
+                while true do
+                    local u559
+
+                    v558, u559 = v556(v557, v558)
+
+                    if v558 == nil then
+                        break
+                    end
+
+                    local _HumanoidRootPart12 = u559.Character.HumanoidRootPart
+                    local _Humanoid7 = u559.Character:FindFirstChild('Humanoid')
+
+                    if _Humanoid7 then
+                        local v562 = math.ceil(v558 ^ 0.5)
+                        local u563, u564
+
+                        if v558 == 1 then
+                            u563 = 0
+                            u564 = 0
+                        else
+                            local v565 = {
+                                {0, v553},
+                                {
+                                    0,
+                                    -v553,
+                                },
+                                {
+                                    -v553,
+                                    0,
+                                },
+                                {v553, 0},
+                                {
+                                    -v553,
+                                    v553,
+                                },
+                                {v553, v553},
+                                {
+                                    -v553,
+                                    -v553,
+                                },
+                                {
+                                    v553,
+                                    -v553,
+                                },
+                            }
+                            local v566 = (v558 - 2) % #v565 + 1
+
+                            u563 = v565[v566][1] * v562
+                            u564 = v565[v566][2] * v562
+                        end
+
+                        _HumanoidRootPart12.CFrame = CFrame.new(_HumanoidRootPart11.Position.X + u563, _HumanoidRootPart11.Position.Y - 5, _HumanoidRootPart11.Position.Z + u564) * CFrame.Angles(math.rad(90), 0, 0)
+
+                        task.spawn(function()
+                            local _BodyVelocity = Instance.new('BodyVelocity')
+
+                            _BodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                            _BodyVelocity.P = 1000
+                            _BodyVelocity.Parent = _HumanoidRootPart12
+
+                            local _BodyGyro = Instance.new('BodyGyro')
+
+                            _BodyGyro.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+                            _BodyGyro.CFrame = _HumanoidRootPart12.CFrame
+                            _BodyGyro.Parent = _HumanoidRootPart12
+
+                            while u559.Character and (p546.Character and _Humanoid7.Health > 0) do
+                                local _Position15 = _HumanoidRootPart11.Position
+
+                                _HumanoidRootPart12.CFrame = CFrame.new(_Position15.X + u563, _HumanoidRootPart12.Position.Y + u554 * task.wait(), _Position15.Z + u564) * CFrame.Angles(math.rad(90), 0, 0)
+                                _BodyGyro.CFrame = _HumanoidRootPart12.CFrame
+                            end
+
+                            _BodyVelocity:Destroy()
+                            _BodyGyro:Destroy()
+                        end)
+                    end
+                end
+            end
+        end, {authRequired = true})
+        v29('mine', 'Bots become hidden mines that explode when their head is touched', function(p570, p571)
+            local u572 = u59(table.concat(p570, ' ')) or p571
+
+            if u572 and u572.Character then
+                if u40(_LocalPlayer2) then
+                    local _Character22 = _LocalPlayer2.Character
+                    local _HumanoidRootPart13 = _Character22.HumanoidRootPart
+                    local _Humanoid8 = _Character22:FindFirstChild('Humanoid')
+                    local _Head = _Character22:FindFirstChild('Head')
+
+                    if not _Head then
+                        return
+                    end
+                    if _Humanoid8 then
+                        _Humanoid8.PlatformStand = true
+
+                        _Humanoid8:ChangeState(Enum.HumanoidStateType.Physics)
+                    end
+
+                    local v577 = Vector3.new(math.random(-15, 15), 0, math.random(-15, 15))
+                    local v578 = u572.Character.HumanoidRootPart.Position + v577 + Vector3.new(0, 50, 0)
+                    local v579 = RaycastParams.new()
+
+                    v579.FilterType = Enum.RaycastFilterType.Blacklist
+                    v579.FilterDescendantsInstances = {_Character22}
+
+                    local v580 = _Workspace2:Raycast(v578, Vector3.new(0, -100, 0), v579)
+
+                    if not v580 then
+                        return
+                    end
+
+                    local _Part2 = Instance.new('Part')
+
+                    _Part2.Size = Vector3.new(4, 1, 4)
+                    _Part2.Position = v580.Position + Vector3.new(0, 1.4, 0)
+                    _Part2.Transparency = 1
+                    _Part2.Anchored = true
+                    _Part2.CanCollide = true
+                    _Part2.Name = 'MinePlatform'
+                    _Part2.Parent = _Workspace2
+                    _HumanoidRootPart13.CFrame = CFrame.new(_Part2.Position - Vector3.new(0, 2.42, 0))
+
+                    local v582, v583, v584 = pairs(_Character22:GetDescendants())
+
+                    while true do
+                        local v585, v586 = v582(v583, v584)
+
+                        if v585 == nil then
+                            break
+                        end
+
+                        v584 = v585
+
+                        if v586:IsA('BasePart') then
+                            v586.CanCollide = false
+                            v586.CanTouch = false
+                        end
+                    end
+
+                    local _BodyPosition = Instance.new('BodyPosition')
+
+                    _BodyPosition.Position = _HumanoidRootPart13.Position
+                    _BodyPosition.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                    _BodyPosition.Parent = _HumanoidRootPart13
+
+                    local u588 = false
+
+                    local function u589()
+                        if not u588 then
+                            u588 = true
+
+                            _Part2:Destroy()
+                            _BodyPosition:Destroy()
+                            _Character22:BreakJoints()
+                        end
+                    end
+
+                    local u591 = _Head.Touched:Connect(function(p590)
+                        if p590.Parent == u572.Character then
+                            u589()
+                        end
+                    end)
+                    local u592 = _RunService2.Heartbeat:Connect(function()
+                        if u572 and u572.Character and (u572.Character:FindFirstChild('HumanoidRootPart') and (u572.Character.HumanoidRootPart.Position - _Head.Position).Magnitude < 3) then
+                            u589()
+                        end
+                    end)
+
+                    _Character22.DescendantRemoving:Connect(function(p593)
+                        if p593 == _BodyPosition then
+                            u592:Disconnect()
+                            u591:Disconnect()
+                            _Part2:Destroy()
+                        end
+                    end)
+                end
+            end
+        end, {authRequired = true})
+        v29('jerk', 'Make alt perform jerk animations', function(_, _)
+            local _LocalPlayer3 = game:GetService('Players').LocalPlayer
+            local _Humanoid9 = (_LocalPlayer3.Character or _LocalPlayer3.CharacterAdded:Wait()):FindFirstChildWhichIsA('Humanoid')
+
+            if _Humanoid9 then
+                local _Animation = Instance.new('Animation')
+
+                _Animation.AnimationId = 'rbxassetid://72042024'
+
+                local _Animation2 = Instance.new('Animation')
+
+                _Animation2.AnimationId = 'rbxassetid://168268306'
+
+                local u598 = _Humanoid9:LoadAnimation(_Animation)
+                local u599 = _Humanoid9:LoadAnimation(_Animation2)
+                local _Length = u598.Length
+                local _Length2 = u599.Length
+                local u602 = _Length - 0.2
+                local u603 = _Length2 - 0.2
+
+                u1.jerking = true
+                u1.jerkLoop = spawn(function()
+                    while u1.jerking do
+                        u598:Play()
+
+                        u598.TimePosition = 0.4
+
+                        if u602 <= u598.TimePosition then
+                            u598.TimePosition = 0.4
+                        end
+
+                        u599:Play()
+
+                        u599.TimePosition = 0.5
+
+                        if u603 <= u599.TimePosition then
+                            u599.TimePosition = 0.5
+                        end
+
+                        wait(0.4)
+                    end
+                end)
+            end
+        end, {authRequired = true})
+        v29('unjerk', 'Stop jerk animations', function()
+            u1.jerking = false
+            u1.jerkLoop = nil
+
+            local _Character23 = game:GetService('Players').LocalPlayer.Character
+            local v605 = _Character23 and _Character23:FindFirstChildWhichIsA('Humanoid')
+
+            if v605 then
+                v605:StopAnimations()
+            end
+        end, {authRequired = true})
+    end
+else
+    return
+end
